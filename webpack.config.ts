@@ -4,12 +4,14 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const config: webpack.Configuration = {
   entry: [
+    'webpack-hot-middleware/client?reload=true',
     'react-hot-loader/patch',
     './src/index.tsx',
   ],
   output: {
     path: path.join(__dirname, 'public/dist'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
 
   // Enable sourcemaps for debugging webpack's output.
@@ -24,7 +26,7 @@ const config: webpack.Configuration = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'react-hot-ts',
+      title: 'IOT Project',
       chunksSortMode: 'dependency',
       template: path.resolve(__dirname, './src/index.ejs'),
     }),
