@@ -9,7 +9,7 @@ const config: webpack.Configuration = {
     './src/index.tsx',
   ],
   output: {
-    path: path.join(__dirname, 'public/dist'),
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
     publicPath: '/',
   },

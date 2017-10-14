@@ -19,7 +19,7 @@ export default class App extends React.Component<{}, { count: number; }> {
     return (
       <div>
         <h1>Hello world!</h1>
-        <div>Welcome to hot-reloading! {this.state.count}</div>
+        <div>Welcome to hot-reloading Typescript! {this.state.count}</div>
       </div>
     );
   }

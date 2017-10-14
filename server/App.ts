@@ -13,9 +13,9 @@ class App {
 
   constructor() {
     this.express = express();
-    this.compiler = webpack(webpackConfig);
     mongoose.connect('mongodb://localhost:27017/iot', { useMongoClient: true });
     this.middleware();
+    if (process.env.NODE_ENV === 'development') this.activateWebpack();
     this.routes();
   }
 
@@ -23,6 +23,11 @@ class App {
     this.express.use(bodyParser.json({ limit: '5mb' }));
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(express.static(`${process.cwd()}/public/`));
+
+  }
+
+  private activateWebpack() : void {
+    this.compiler = webpack(webpackConfig);
     this.express.use(webpackDevMiddleware(this.compiler, { publicPath: '/' }));
     this.express.use(webpackHotMiddleware(this.compiler));
   }
