@@ -1,12 +1,10 @@
 .nav {
-  border: 1px solid white;
   height: 100%;
   margin-top: 32px;
   width: 268px;
 
   &-item {
     align-items: center;
-    border: 1px solid white;
     display: flex;
     flex-flow: wrap row;
     min-height: 60px;
@@ -28,6 +26,19 @@
 
     &-children {
       display: block;
+      color: white;
+      width: 100%;
+      font-size: 14px;
+      font-weight: normal;
+
+      h3 {
+        align-items: center;
+        display: flex;
+        height: 48px;
+        margin: 0 0 0 64px;
+        padding: 0;
+        text-transform: uppercase;
+      }
     }
   }
 }
