@@ -19,7 +19,7 @@ const config: webpack.Configuration = {
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
+    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css', '.scss'],
   },
 
   plugins: [
@@ -42,7 +42,25 @@ const config: webpack.Configuration = {
         exclude: path.resolve(__dirname, 'node_modules'),
         include: path.resolve(__dirname, 'src'),
       },
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      {
+        test: /\.scss$/,
+        include: [
+          path.resolve(__dirname, 'src/components'),
+          path.resolve(__dirname, 'src/sass'),
+        ],
+        use: [
+          { loader: 'style-loader' },
+          {
+            loader: 'typings-for-css-modules-loader',
+            options: {
+              namedExport: true,
+              camelCase: true,
+              modules: true,
+            },
+          },
+          { loader: 'sass-loader' },
+        ],
+      },
       {
         enforce: 'pre',
         test: /\.js$/,

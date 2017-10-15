@@ -1,4 +1,6 @@
+
 import * as React from 'react';
+import { app } from './App.scss';
 
 export default class App extends React.Component<{}, { count: number; }> {
   interval: number;
@@ -17,7 +19,7 @@ export default class App extends React.Component<{}, { count: number; }> {
 
   render() {
     return (
-      <div>
+      <div className={app}>
         <h1>Hello world!</h1>
         <div>Welcome to hot-reloading Typescript! {this.state.count}</div>
       </div>
