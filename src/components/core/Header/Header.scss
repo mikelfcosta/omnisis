@@ -3,6 +3,23 @@
   border: 1px solid #E0E0E0;
   display: flex;
   flex: 1 100%;
+  flex-direction: row;
   height: 64px;
   margin-left: 300px;
+  padding: 8px 16px;
+
+  &-search {
+    background-color: #E0E0E0;
+    border: 1px solid #BDBDBD;
+    flex: 1 30%;
+    height: 48px;
+  }
+
+  &-button {
+    background-color: #E0E0E0;
+    border: 1px solid #BDBDBD;
+    height: 48px;
+    margin: 0 8px;
+    width: 48px;
+  }
 }

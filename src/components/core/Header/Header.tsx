@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { header } from './Header.scss';
+import HeaderSearch from './HeaderSearch';
+import HeaderButton from './HeaderButton';
+import UserProfile from './UserProfile';
 
 export default class Header extends React.Component<{}, {}> {
 
@@ -10,7 +13,10 @@ export default class Header extends React.Component<{}, {}> {
   render() {
     return (
       <div className={header}>
-        header Div
+        <HeaderSearch />
+        <span style={{ flex: 1 }} />
+        <HeaderButton />
+        <UserProfile />
       </div>
     );
   }
