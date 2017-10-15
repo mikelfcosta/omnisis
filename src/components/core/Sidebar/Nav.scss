@@ -1,3 +1,5 @@
+@import "../../../sass/variables";
+
 .nav {
   height: 100%;
   margin-top: 32px;
@@ -19,22 +21,22 @@
       color: white;
       margin: 0;
       font-size: 18px;
-      font-weight: bold;
+      font-weight: 700;
       text-transform: uppercase;
       padding: 0 8px;
     }
 
     &-children {
       display: block;
-      color: white;
+      color: $color-clear;
       width: 100%;
       font-size: 14px;
-      font-weight: normal;
 
       h3 {
         align-items: center;
         display: flex;
         height: 48px;
+        font-weight: 600;
         margin: 0 0 0 64px;
         padding: 0;
         text-transform: uppercase;
