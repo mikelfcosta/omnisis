@@ -11,8 +11,14 @@
   z-index: $z-index-sidebar;
 
   &-logo {
-    border: 1px solid white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 96px;
     width: 268px;
-    height: 96px;
+
+    img {
+      height: 80px;
+    }
   }
 }

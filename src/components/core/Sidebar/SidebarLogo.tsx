@@ -10,7 +10,7 @@ export default class SidebarLogo extends React.Component<{}, {}> {
   render() {
     return (
       <div className={sidebarLogo}>
-
+        <img srcSet={'img/logo.svg'} />
       </div>
     );
   }
