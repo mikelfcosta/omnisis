@@ -9,7 +9,6 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border: 1px solid rgba(255,255,255, 0.24);
   }
 
   & > div {
@@ -24,14 +23,14 @@
       margin: 0;
       padding: 0;
       font-size: 18px;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     h4 {
       margin: 0;
       padding: 0;
       font-size: 14px;
-      font-weight: normal;
+      font-weight: 400;
     }
   }
 }
