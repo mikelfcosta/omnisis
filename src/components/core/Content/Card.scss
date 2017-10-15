@@ -1,7 +1,9 @@
+@import "../../../sass/variables";
+
 .card {
   background-color: white;
   border-radius: 2px;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);
+  box-shadow: $whiteframe-shadow-1dp;
   flex: 1 100%;
   margin: 8px;
   position: relative;
