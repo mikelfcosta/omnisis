@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'CircularSTD';
+  font-style: normal;
+  font-weight: 400;
+  src: local('CircularSTD'),
+  url('/fonts/circularstd_book.woff2') format('woff2');
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+@font-face {
+  font-family: 'CircularSTD';
+  font-style: italic;
+  font-weight: 400;
+  src: local('CircularSTD'),
+  url('/fonts/circularstd_bookitalic.woff2') format('woff2');
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+@font-face {
+  font-family: 'CircularSTD';
+  font-style: normal;
+  font-weight: 600;
+  src: local('CircularSTD'),
+  url('/fonts/circularstd_medium.woff2') format('woff2');
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+@font-face {
+  font-family: 'CircularSTD';
+  font-style: italic;
+  font-weight: 600;
+  src: local('CircularSTD'),
+  url('/fonts/circularstd_mediumitalic.woff2') format('woff2');
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+@font-face {
+  font-family: 'CircularSTD';
+  font-style: normal;
+  font-weight: bold;
+  src: local('CircularSTD'),
+  url('/fonts/circularstd_bold.woff2') format('woff2');
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+@font-face {
+  font-family: 'CircularSTD';
+  font-style: italic;
+  font-weight: bold;
+  src: local('CircularSTD'),
+  url('/fonts/circularstd_bolditalic.woff2') format('woff2');
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+@font-face {
+  font-family: 'CircularSTD';
+  font-style: normal;
+  font-weight: 800;
+  src: local('CircularSTD'),
+  url('/fonts/circularstd_black.woff2') format('woff2');
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+@font-face {
+  font-family: 'CircularSTD';
+  font-style: italic;
+  font-weight: 800;
+  src: local('CircularSTD'),
+  url('/fonts/circularstd_blackitalic.woff2') format('woff2');
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
