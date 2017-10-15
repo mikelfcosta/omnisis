@@ -2,11 +2,13 @@
   background-color: #F2F2F2;
   border: 1px solid #E0E0E0;
   display: flex;
-  flex: 1 100%;
   flex-direction: row;
   height: 64px;
   margin-left: 300px;
   padding: 8px 16px;
+  position: fixed;
+  width: calc(100% - 300px);
+  z-index: 10;
 
   &-search {
     background-color: #E0E0E0;
