@@ -12,9 +12,15 @@ export default class Content extends React.Component<{}, {}> {
     return (
       <div className={content}>
         <div className={headerBackdrop} />
-        <Card />
-        <Card />
-        <Card />
+        <Card height={500} size={100}>
+          <p>Resumo</p>
+        </Card>
+        <Card height={300} size={65}>
+          <p>Últimos Acessos</p>
+        </Card>
+        <Card height={300} size={35}>
+          <p>Alunos no Campos</p>
+        </Card>
       </div>
     );
   }

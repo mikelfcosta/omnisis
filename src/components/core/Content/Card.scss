@@ -1,11 +1,15 @@
 @import "../../../sass/variables";
 
 .card {
-  background-color: white;
-  border-radius: 2px;
-  box-shadow: $whiteframe-shadow-1dp;
-  flex: 1 100%;
-  margin: 8px;
+  padding: 8px;
   position: relative;
-  padding: 16px;
+
+  & > div {
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: $whiteframe-shadow-1dp;
+    height: 100%;
+    padding: 16px;
+    width: 100%;
+  }
 }
