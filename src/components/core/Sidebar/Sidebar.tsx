@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { sidebar } from './Sidebar.scss';
+import SidebarLogo from './SidebarLogo';
+import Nav from './Nav';
 
 export default class Sidebar extends React.Component<{}, {}> {
 
@@ -10,7 +12,8 @@ export default class Sidebar extends React.Component<{}, {}> {
   render() {
     return (
       <div className={sidebar}>
-        Sidebar Div
+        <SidebarLogo />
+        <Nav />
       </div>
     );
   }
