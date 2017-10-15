@@ -10,7 +10,11 @@ export default class UserProfile extends React.Component<{}, {}> {
   render() {
     return (
       <div className={userProfile}>
-
+        <img srcSet={'img/default-avatar.png'} />
+        <div>
+          <h3>Michel Costa</h3>
+          <h4>Admin</h4>
+        </div>
       </div>
     );
   }
