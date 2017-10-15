@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { nav } from './Nav.scss';
+import { nav, navItem, navItemChildren } from './Nav.scss';
+import { HOME, INSIGHTS, USERS } from '../../../icons';
 
 interface INavState {
   navigation: INavigation[];
@@ -16,11 +17,11 @@ const navigation = [
   {
     name: 'Dashboard',
     link: '/',
-    icon: '',
+    icon: HOME,
   },
   {
     name: 'Alunos',
-    icon: '',
+    icon: USERS,
     children: [
       { name: 'Administrar', link: '/students/admin' },
       { name: 'Grupos e Perfis', link: '/students/groups' },
@@ -28,7 +29,7 @@ const navigation = [
   },
   {
     name: 'Insights',
-    icon: '',
+    icon: INSIGHTS,
     children: [
       { name: 'Comportamento', link: '/insights/behavior' },
       { name: 'Campus', link: '/insights/campus' },
@@ -51,7 +52,7 @@ export default class Nav extends React.Component<any, INavState> {
   renderNavigation() {
     return this.state.navigation.map((nav) => {
       return (
-        <div key={nav.name}>
+        <div key={nav.name} className={navItem}>
           <img srcSet={nav.icon} alt="icon" />
           <h2>{nav.name}</h2>
           {this.renderNavigationChildren(nav)}
@@ -69,7 +70,7 @@ export default class Nav extends React.Component<any, INavState> {
         );
       });
       return (
-        <div>
+        <div className={navItemChildren}>
           { children }
         </div>
       );

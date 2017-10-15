@@ -3,4 +3,31 @@
   height: 100%;
   margin-top: 32px;
   width: 268px;
+
+  &-item {
+    align-items: center;
+    border: 1px solid white;
+    display: flex;
+    flex-flow: wrap row;
+    min-height: 60px;
+    padding: 8px;
+
+    img {
+      width: 44px;
+      height: 44px;
+    }
+
+    h2 {
+      color: white;
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 0 8px;
+    }
+
+    &-children {
+      display: block;
+    }
+  }
 }
