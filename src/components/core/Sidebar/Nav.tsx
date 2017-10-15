@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { nav, navItem, navItemChildren } from './Nav.scss';
+import { nav, navItem, active, navItemChildren } from './Nav.scss';
 import { HOME, INSIGHTS, USERS } from '../../../icons';
 
 interface INavState {
@@ -53,6 +53,8 @@ export default class Nav extends React.Component<any, INavState> {
     return this.state.navigation.map((nav) => {
       return (
         <div key={nav.name} className={navItem}>
+          <span className={(nav.name === 'Dashboard' ? `${active}` : '')} />
+          <span className={(nav.name === 'Dashboard' ? `${active}` : '')} />
           <img srcSet={nav.icon} alt="icon" />
           <h2>{nav.name}</h2>
           {this.renderNavigationChildren(nav)}
