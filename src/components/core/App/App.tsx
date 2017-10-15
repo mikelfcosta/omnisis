@@ -1,27 +1,22 @@
-
 import * as React from 'react';
 import { app } from './App.scss';
+import Container from '../Container/Container';
+import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
 
-export default class App extends React.Component<{}, { count: number; }> {
-  interval: number;
-  state = { count: 0 };
+export default class App extends React.Component<{}, {}> {
 
-  // This state will be maintained during hot reloads
-  componentWillMount() {
-    this.interval = window.setInterval(() => {
-      this.setState({ count: this.state.count + 1 });
-    }, 1000);
-  }
+  componentWillMount() {}
 
-  componentWillUnmount() {
-    window.clearInterval(this.interval);
-  }
+  componentWillUnmount() {}
 
   render() {
     return (
       <div className={app}>
         <h1>Hello world!</h1>
-        <div>Welcome to hot-reloading Typescript! {this.state.count}</div>
+        <Sidebar />
+        <Header />
+        <Container />
       </div>
     );
   }
