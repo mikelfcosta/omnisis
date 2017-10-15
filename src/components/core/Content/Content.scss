@@ -1,8 +1,20 @@
 .content {
-  background-color: #F2F2F2;
+  background-color: #FAFAFA;
   border: 1px solid #E0E0E0;
   display: flex;
   flex: 1 100%;
-  height: calc(100vh - 64px);
+  flex-wrap: wrap;
+  min-height: calc(100vh - 64px);
   margin-left: 300px;
+  padding: 8px;
+  position: relative;
+}
+
+.header-backdrop {
+  background-color: #F2F2F2;
+  height: 32px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { content } from './Content.scss';
+import { content, headerBackdrop } from './Content.scss';
+import Card from './Card';
 
 export default class Content extends React.Component<{}, {}> {
 
@@ -10,7 +11,10 @@ export default class Content extends React.Component<{}, {}> {
   render() {
     return (
       <div className={content}>
-        Content Div
+        <div className={headerBackdrop} />
+        <Card />
+        <Card />
+        <Card />
       </div>
     );
   }
