@@ -15,7 +15,7 @@ export default class Header extends React.Component<{}, {}> {
       <div className={header}>
         <HeaderSearch />
         <span style={{ flex: 1 }} />
-        <HeaderButton />
+        <HeaderButton icon={'img/ico-notification.svg'} />
         <UserProfile />
       </div>
     );

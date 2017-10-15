@@ -1,7 +1,15 @@
 import * as React from 'react';
 import { headerButton } from './Header.scss';
 
-export default class HeaderButton extends React.Component<{}, {}> {
+interface IHeaderButtonProps {
+  icon: string;
+}
+
+export default class HeaderButton extends React.Component<IHeaderButtonProps, {}> {
+
+  constructor(props: IHeaderButtonProps) {
+    super(props);
+  }
 
   componentWillMount() {}
 
@@ -10,7 +18,7 @@ export default class HeaderButton extends React.Component<{}, {}> {
   render() {
     return (
       <div className={headerButton}>
-
+        <img srcSet={this.props.icon} alt="Button" />
       </div>
     );
   }
