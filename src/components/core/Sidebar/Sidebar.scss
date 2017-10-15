@@ -1,11 +1,14 @@
+@import "../../../sass/variables";
+
 .sidebar {
-  background: linear-gradient(180deg, #ED9262 0%, #E66B48 100%);
+  background: linear-gradient(180deg, $color-primary 15%, #E66B48 115%);
   display: flex;
   flex-direction: column;
   height: 100vh;
   padding: 8px 16px;
   position: fixed;
-  width: 300px;
+  width: $size-sidebar-width;
+  z-index: $z-index-sidebar;
 
   &-logo {
     border: 1px solid white;
