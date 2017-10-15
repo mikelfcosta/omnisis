@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import App from './components/core/App/App';
+import './sass/base.scss';
 
 const rootEl = document.getElementById('root');
 ReactDOM.render(
