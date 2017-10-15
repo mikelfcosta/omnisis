@@ -1,25 +1,24 @@
+@import "../../../sass/variables";
+
 .header {
-  background-color: #F2F2F2;
-  border: 1px solid #E0E0E0;
+  background-color: $color-primary;
   display: flex;
   flex-direction: row;
-  height: 64px;
-  margin-left: 300px;
+  height: $size-header-height;
+  margin-left: $size-sidebar-width;
   padding: 8px 16px;
   position: fixed;
-  width: calc(100% - 300px);
-  z-index: 10;
+  width: calc(100% - #{$size-sidebar-width});
+  z-index: $z-index-header;
 
   &-search {
-    background-color: #E0E0E0;
-    border: 1px solid #BDBDBD;
-    flex: 1 30%;
+    border: 1px solid white;
+    flex: 1 25%;
     height: 48px;
   }
 
   &-button {
-    background-color: #E0E0E0;
-    border: 1px solid #BDBDBD;
+    border: 1px solid white;
     height: 48px;
     margin: 0 8px;
     width: 48px;
