@@ -1,0 +1,42 @@
+// Custom Styles
+
+@mixin OutlinedLight() {
+  background: #F8F4F4;
+  border: 1px solid #DDDDDD;
+  box-sizing: border-box;
+}
+
+/* Style / Big_shadow */
+@mixin BigShadow() {
+  background: #F8F4F4;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.24);
+}
+
+@mixin SubtleShadow() {
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0877491);
+}
+
+@mixin InnerShadow() {
+  background: #F8F4F4;
+  box-shadow: inset 4px -14px 11px rgba(0, 0, 0, 0.0222203);
+}
+
+@mixin FilledOutlined() {
+  background: #FFFFFF;
+  border: 1px solid #34495E;
+  box-sizing: border-box;
+}
+
+@mixin ActiveGrey() {
+  background: #F8F4F4;
+  border: 1px solid #34495E;
+  box-sizing: border-box;
+}
+
+@mixin ActiveBlue() {
+  background: #FFFFFF;
+  border: 1px solid #55ACEE;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0877491);
+}
