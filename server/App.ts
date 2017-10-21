@@ -13,6 +13,7 @@ class App {
 
   constructor() {
     this.express = express();
+    (<any>mongoose).Promise = Promise;
     mongoose.connect('mongodb://localhost:27017/iot', { useMongoClient: true });
     this.middleware();
     if (process.env.NODE_ENV === 'development') this.activateWebpack();
