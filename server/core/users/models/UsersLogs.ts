@@ -23,4 +23,4 @@ class UsersLogs {
   }
 }
 
-export const usersLogsSchema = model<IOmniUsersLogsModel>('OminUsersLogs', UsersLogs.schema);
+export const omniUsersLogs = model<IOmniUsersLogsModel>('OminUsersLogs', UsersLogs.schema);

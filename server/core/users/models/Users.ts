@@ -26,11 +26,11 @@ class Users {
     return new Schema({
       _id: { type: String, required: true },
       password: { type: String, required: true, default: null },
-      roles: [{ type: Schema.Types.ObjectId, ref: 'OmniRoles', required: true }],
+      roles: [{ type: Schema.Types.ObjectId, ref: 'OmniRoles' }],
       active: { type: Boolean, default: false },
       createdAt: { type: Date, default: Date.now },
       createdBy: { type: Schema.Types.ObjectId, ref: 'OmniUsers', required: true },
-      lastLogin: { type: Date, default: Date.now },
+      lastLogin: { type: Date, default: null },
       profile: {
         _id: false,
         name: String,
@@ -41,4 +41,4 @@ class Users {
   }
 }
 
-export const usersSchema = model<IOmniUsersModel>('OmniUsers', Users.schema);
+export const omniUsers = model<IOmniUsersModel>('OmniUsers', Users.schema);
