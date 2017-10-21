@@ -8,7 +8,7 @@ const core = OmniRouter.coreApi;
 const path = `${core}/users/new`;
 
 describe('[Core] Create Users Tests', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     return omniUsers.remove({});
   });
 
@@ -29,7 +29,23 @@ describe('[Core] Create Users Tests', () => {
         }
       });
   });
-  test('does not create a new user with incorrect info');
+  test('does not create a new user with incorrect info', (done) => {
+    const userToCreate = { password: 'created1234' };
+    agent
+      .post(path)
+      .send(userToCreate)
+      .expect(400)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        try {
+          const user = await omniUsers.findOne({}).lean();
+          expect(user).toBeNull();
+          return done();
+        } catch (err) {
+          return done(err);
+        }
+      });
+  });
   test('does not create a new user on unauthorized access');
   test('does not create a new user on unauthenticated access');
 });

@@ -21,7 +21,7 @@ export default async (req: Request, res: Response) => {
       payload: { user: createdUser._id },
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
+    if (err.name === 'ValidationError') return res.status(400).json({ message: 'Erro ao validar o Usuário' });
+    return res.status(500).json(err);
   }
 };
