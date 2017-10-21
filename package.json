@@ -21,7 +21,8 @@
   "scripts": {
     "start": "npm run build && cross-env NODE_ENV=production TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"es2017\\\"} ts-node -F ./server/index.ts",
     "dev": "cross-env NODE_ENV=development TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"es2017\\\"} ts-node -F ./server/index.ts",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "jest"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.5",
