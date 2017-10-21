@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { omniUsers } from '../../models/Users';
 
 /**
  * Creates a new User
@@ -9,7 +10,16 @@ import { Request, Response } from 'express';
  */
 export default async (req: Request, res: Response) => {
   try {
-    res.sendStatus(200);
+    const user = new omniUsers({
+      _id: req.body.username,
+      password: req.body.password,
+      createdBy: 'TEST.USER',
+    });
+    const createdUser = await user.save();
+    return res.json({
+      message: 'Usuário criado com sucesso',
+      payload: { user: createdUser._id },
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json(err);

@@ -8,6 +8,10 @@ const core = OmniRouter.coreApi;
 const path = `${core}/users/new`;
 
 describe('[Core] Create Users Tests', () => {
+  beforeAll(() => {
+    return omniUsers.remove({});
+  });
+
   test('creates a new user with correct info', (done) => {
     const userToCreate = { username: 'CREATED.USER', password: 'created1234' };
     agent
@@ -17,8 +21,8 @@ describe('[Core] Create Users Tests', () => {
       .end(async (err, res) => {
         if (err) return done(err);
         try {
-          const user = await omniUsers.findById(userToCreate.username);
-          expect(user).toContain({ _id: userToCreate.username });
+          const user = await omniUsers.findById(userToCreate.username).lean();
+          expect(user).toMatchObject({ _id: userToCreate.username });
           return done();
         } catch (err) {
           return done(err);

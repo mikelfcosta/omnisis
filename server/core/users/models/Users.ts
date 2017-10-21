@@ -29,7 +29,7 @@ class Users {
       roles: [{ type: Schema.Types.ObjectId, ref: 'OmniRoles' }],
       active: { type: Boolean, default: false },
       createdAt: { type: Date, default: Date.now },
-      createdBy: { type: Schema.Types.ObjectId, ref: 'OmniUsers', required: true },
+      createdBy: { type: String, ref: 'OmniUsers', required: true },
       lastLogin: { type: Date, default: null },
       profile: {
         _id: false,
