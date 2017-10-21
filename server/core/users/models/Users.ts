@@ -1,4 +1,4 @@
-import { Schema, Document } from 'mongoose';
+import { Schema, Document, model } from 'mongoose';
 
 export interface IOmniUsersModel extends Document {
   _id: string;
@@ -41,4 +41,4 @@ class Users {
   }
 }
 
-export const usersSchema = Users;
+export const usersSchema = model<IOmniUsersModel>('OmniUsers', Users.schema);

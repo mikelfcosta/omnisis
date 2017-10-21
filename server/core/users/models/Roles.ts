@@ -1,4 +1,4 @@
-import { Schema, Document } from 'mongoose';
+import { Schema, Document, model } from 'mongoose';
 
 export interface IOmniUsersRolesModel extends Document {
   _id: Schema.Types.ObjectId;
@@ -29,4 +29,4 @@ class Roles {
   }
 }
 
-export const rolesSchema = Roles;
+export const omniUsersRoles = model<IOmniUsersRolesModel>('OmniUsersRoles', Roles.schema);

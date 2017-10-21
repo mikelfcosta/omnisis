@@ -1,4 +1,4 @@
-import { Schema, Document } from 'mongoose';
+import { Schema, Document, model } from 'mongoose';
 
 export interface IOmniUsersLogsModel extends Document {
   _id: Schema.Types.ObjectId;
@@ -23,4 +23,4 @@ class UsersLogs {
   }
 }
 
-export const usersLogsSchema = UsersLogs;
+export const usersLogsSchema = model<IOmniUsersLogsModel>('OminUsersLogs', UsersLogs.schema);
