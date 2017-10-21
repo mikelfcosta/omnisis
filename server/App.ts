@@ -33,7 +33,7 @@ class App {
   }
 
   private routes() : void {
-    this.express.use('/', Router.iot);
+    this.express.use('/', Router.omni);
   }
 }
 
