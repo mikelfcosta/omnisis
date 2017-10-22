@@ -1,7 +1,7 @@
 import * as supertest from 'supertest';
 import App from '../../../App';
 import { OmniRouter } from '../../../Router';
-import { IOmniUsersModel, omniUsers } from '../models/Users';
+import { IOmniUsers, omniUsers } from '../models/Users';
 
 const agent = supertest.agent(App);
 const core = OmniRouter.coreApi;
@@ -18,10 +18,10 @@ describe('[Core] Create Users Tests', () => {
       .post(path)
       .send(userToCreate)
       .expect(200)
-      .end(async (err, res) => {
+      .end(async (err) => {
         if (err) return done(err);
         try {
-          const user = <IOmniUsersModel>await omniUsers.findById(userToCreate.username).lean();
+          const user = <IOmniUsers>await omniUsers.findById(userToCreate.username).lean();
           expect(user).toMatchObject({ _id: userToCreate.username });
           expect(user.password).not.toBe(userToCreate.password);
           return done();
@@ -36,7 +36,7 @@ describe('[Core] Create Users Tests', () => {
       .post(path)
       .send(userToCreate)
       .expect(400)
-      .end(async (err, res) => {
+      .end(async (err) => {
         if (err) return done(err);
         try {
           const user = await omniUsers.findOne({}).lean();

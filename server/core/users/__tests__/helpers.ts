@@ -1,9 +1,9 @@
 import * as faker from 'faker';
-import { IOmniUsersModel, omniUsers } from '../models/Users';
+import { IOmniUsers, omniUsers } from '../models/Users';
 
 export async function populateUsers(usersToCreate: number = 10) {
   let usersCreated = 1;
-  const users: IOmniUsersModel[] = [];
+  const users: IOmniUsers[] = [];
   const admin = new omniUsers({ _id: 'ADMIN', password: 'admin', createdBy: 'ADMIN', active: true });
   try {
     users.push(await admin.save());
