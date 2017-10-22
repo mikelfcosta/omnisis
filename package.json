@@ -23,7 +23,7 @@
     "start": "npm run build && cross-env NODE_ENV=production TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"es2017\\\"} ts-node -F ./server/index.ts",
     "dev": "cross-env NODE_ENV=development TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"es2017\\\"} ts-node -F ./server/index.ts",
     "build": "webpack",
-    "test": "jest"
+    "test": "jest --runInBand"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.1",
