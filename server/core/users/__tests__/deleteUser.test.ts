@@ -8,7 +8,7 @@ const agent = supertest.agent(App);
 const core = OmniRouter.coreApi;
 const path = `${core}/users/:id`;
 
-describe('[Core] Create Users Tests', () => {
+describe('[Core] Delete Users Tests', () => {
   let users: IOmniUsersModel[];
   let userToDelete: IOmniUsersModel;
   let url: string;

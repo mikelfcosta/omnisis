@@ -18,7 +18,6 @@ describe('[Core] Get User By ID Tests', () => {
     users = <IOmniUsersModel[]>await populateUsers(6);
     userToGet = users[1];
     url = path.replace(':id', userToGet._id);
-    return Promise.resolve();
   });
 
   test('gets an user with correct info', (done) => {
