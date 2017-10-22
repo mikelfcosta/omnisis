@@ -6,13 +6,14 @@ import getUserById from './api/users/getUserById';
 import createUser from './api/users/createUser';
 import updateUser from './api/users/updateUser';
 import deleteUser from './api/users/deleteUser';
+import parseQuery from '../parseQuery';
 
 const router = Router();
 
 router.get('/login', login);
 router.get('/logout', logout);
 
-router.get('', getUsers);
+router.get('', parseQuery(true), getUsers);
 router.post('/new', createUser);
 router.route('/:_id')
   .get(getUserById)
