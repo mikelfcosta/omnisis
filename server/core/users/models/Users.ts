@@ -1,4 +1,5 @@
-import { Schema, Document } from 'mongoose';
+import { Schema, Document, model, NativeError } from 'mongoose';
+import * as bcrypt from 'bcryptjs';
 
 export interface IOmniUsersModel extends Document {
   _id: string;
@@ -16,21 +17,24 @@ export interface IOmniUsersModel extends Document {
 }
 
 class Users {
-  schema: Schema;
+  public schema: Schema;
 
   constructor() {
+    this.setSchema();
     this.schema.loadClass(Users);
+    this.schema.pre('save', this.hashPassword);
+    this.schema.pre('update', this.hashPassword);
   }
 
-  static get schema() {
-    return new Schema({
+  setSchema() {
+    this.schema = new Schema({
       _id: { type: String, required: true },
       password: { type: String, required: true, default: null },
-      roles: [{ type: Schema.Types.ObjectId, ref: 'OmniRoles', required: true }],
+      roles: [{ type: Schema.Types.ObjectId, ref: 'OmniRoles' }],
       active: { type: Boolean, default: false },
       createdAt: { type: Date, default: Date.now },
-      createdBy: { type: Schema.Types.ObjectId, ref: 'OmniUsers', required: true },
-      lastLogin: { type: Date, default: Date.now },
+      createdBy: { type: String, ref: 'OmniUsers', required: true },
+      lastLogin: { type: Date, default: null },
       profile: {
         _id: false,
         name: String,
@@ -39,6 +43,19 @@ class Users {
       },
     });
   }
+
+  async hashPassword(this: IOmniUsersModel, next: (err?: NativeError) => void) {
+    if (this.isModified('password')) {
+      try {
+        this.password = await bcrypt.hash(<string>this.password, 8);
+        return next();
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    } else next();
+  }
+
 }
 
-export const usersSchema = Users;
+
+export const omniUsers = model<IOmniUsersModel>('OmniUsers', new Users().schema);
