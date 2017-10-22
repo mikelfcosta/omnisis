@@ -62,7 +62,9 @@
     "transform": {
       "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
+    "testPathIgnorePatterns": ["helpers.ts"],
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testEnvironment": "node",
     "moduleFileExtensions": [
       "ts",
       "tsx",

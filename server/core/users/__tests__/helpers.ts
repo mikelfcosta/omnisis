@@ -4,7 +4,7 @@ import { IOmniUsersModel, omniUsers } from '../models/Users';
 export async function populateUsers(usersToCreate: number = 10) {
   let usersCreated = 1;
   const users: IOmniUsersModel[] = [];
-  const admin = new omniUsers({ _id: 'ADMIN', password: 'admin', createdBy: 'ADMIN' });
+  const admin = new omniUsers({ _id: 'ADMIN', password: 'admin', createdBy: 'ADMIN', active: true });
   try {
     users.push(await admin.save());
     for (usersCreated; usersCreated < usersToCreate; usersCreated += 1) {
@@ -12,6 +12,7 @@ export async function populateUsers(usersToCreate: number = 10) {
         _id: faker.internet.userName(),
         password: faker.internet.password(),
         createdBy: admin._id,
+        active: true,
       });
       users.push(await user.save());
     }
