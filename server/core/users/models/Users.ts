@@ -1,8 +1,8 @@
-import { Schema, Document, model, NativeError } from 'mongoose';
+import { Schema, Document, model, NativeError, Model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 
-export interface IOmniUsersModel extends Document {
+export interface IOmniUsers extends Document {
   _id: string;
   password: string | null;
   role: Schema.Types.ObjectId[];
@@ -16,6 +16,13 @@ export interface IOmniUsersModel extends Document {
     id?: string;
     image?: string;
   };
+}
+
+export interface IOmniUsersModel extends Model<IOmniUsers> {
+  generateAuthToken: (userinfo: any) => Promise<IOmniUsers>;
+  removeToken: (_id: string) => void;
+  findByToken: (token: string) => IOmniUsersModel | null;
+  findByCredentials: (username: string, password: string) => IOmniUsers | null;
 }
 
 class Users {
@@ -47,7 +54,7 @@ class Users {
     });
   }
 
-  private async hashPassword(this: IOmniUsersModel, next: (err?: NativeError) => void) {
+  private async hashPassword(this: IOmniUsers, next: (err?: NativeError) => void) {
     if (this.isModified('password')) {
       try {
         this.password = await bcrypt.hash(<string>this.password, 8);
@@ -58,19 +65,20 @@ class Users {
     } else next();
   }
 
-  public async generateAuthToken(this: IOmniUsersModel, userinfo: any) {
+  public async generateAuthToken(this: IOmniUsers, userinfo: IOmniUsers) {
     const token = jwt.sign(userinfo, 'omniforyou').toString(); // Create a token with a secret
     this.tokens.push({ token, access: 'auth' }); // Add the token to the user document
-    return await this.save(); // Save the token and return it
+    await this.save(); // Save the token and return it
+    return this.tokens;
   }
 
-  public static async removeToken(this: any, _id: string) {
+  public static async removeToken(this: IOmniUsersModel, _id: string) {
     return await this.findByIdAndUpdate(_id, { tokens: [] }, { new: true });
   }
 
-  public static async findByToken(this: any, token: string) {
+  public static async findByToken(this: IOmniUsersModel, token: string) {
     try {
-      const decoded = <IOmniUsersModel>jwt.verify(token, 'omniforyou');
+      const decoded = <IOmniUsers>jwt.verify(token, 'omniforyou');
       return await this.findOne({
         _id: decoded._id,
         'tokens.token': token,
@@ -84,15 +92,16 @@ class Users {
     }
   }
 
-  public static async findByCredentials(this: any, username: string, password: string) {
+  public static async findByCredentials(this: IOmniUsersModel, username: string, password: string) {
     try {
-      const user = this.findById(username)
-        .populate('role permissions');
+      const user = <IOmniUsers>await this.findById(username, 'profile password roles active').populate('roles').lean();
       if (!user) return Promise.reject(0);
       else if (!user.active) return Promise.reject(1);
       else if (user.password === null) return Promise.reject(2);
 
       const correctPassword = await bcrypt.compare(password, user.password);
+      delete user.password;
+
       if (correctPassword) return user;
       else return Promise.reject(3);
     } catch (err) {
@@ -102,4 +111,5 @@ class Users {
 
 }
 
-export const omniUsers = model<IOmniUsersModel>('OmniUsers', new Users().schema);
+export const omniUsers: IOmniUsersModel = model<IOmniUsers, IOmniUsersModel>('OmniUsers', new Users().schema);
+export default omniUsers;
