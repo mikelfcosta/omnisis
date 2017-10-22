@@ -23,6 +23,7 @@ class Users {
     this.setSchema();
     this.schema.loadClass(Users);
     this.schema.pre('save', this.hashPassword);
+    this.schema.pre('update', this.hashPassword);
   }
 
   setSchema() {
