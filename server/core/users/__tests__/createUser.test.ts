@@ -1,7 +1,7 @@
 import * as supertest from 'supertest';
 import App from '../../../App';
 import { OmniRouter } from '../../../Router';
-import { omniUsers } from '../models/Users';
+import { IOmniUsersModel, omniUsers } from '../models/Users';
 
 const agent = supertest.agent(App);
 const core = OmniRouter.coreApi;
@@ -21,8 +21,9 @@ describe('[Core] Create Users Tests', () => {
       .end(async (err, res) => {
         if (err) return done(err);
         try {
-          const user = await omniUsers.findById(userToCreate.username).lean();
+          const user = <IOmniUsersModel>await omniUsers.findById(userToCreate.username).lean();
           expect(user).toMatchObject({ _id: userToCreate.username });
+          expect(user.password).not.toBe(userToCreate.password);
           return done();
         } catch (err) {
           return done(err);

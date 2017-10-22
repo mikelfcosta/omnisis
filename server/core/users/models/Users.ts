@@ -1,4 +1,5 @@
-import { Schema, Document, model } from 'mongoose';
+import { Schema, Document, model, NativeError } from 'mongoose';
+import * as bcrypt from 'bcryptjs';
 
 export interface IOmniUsersModel extends Document {
   _id: string;
@@ -16,14 +17,16 @@ export interface IOmniUsersModel extends Document {
 }
 
 class Users {
-  schema: Schema;
+  public schema: Schema;
 
   constructor() {
+    this.setSchema();
     this.schema.loadClass(Users);
+    this.schema.pre('save', this.hashPassword);
   }
 
-  static get schema() {
-    return new Schema({
+  setSchema() {
+    this.schema = new Schema({
       _id: { type: String, required: true },
       password: { type: String, required: true, default: null },
       roles: [{ type: Schema.Types.ObjectId, ref: 'OmniRoles' }],
@@ -39,6 +42,19 @@ class Users {
       },
     });
   }
+
+  async hashPassword(this: IOmniUsersModel, next: (err?: NativeError) => void) {
+    if (this.isModified('password')) {
+      try {
+        this.password = await bcrypt.hash(<string>this.password, 8);
+        return next();
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    } else next();
+  }
+
 }
 
-export const omniUsers = model<IOmniUsersModel>('OmniUsers', Users.schema);
+
+export const omniUsers = model<IOmniUsersModel>('OmniUsers', new Users().schema);
