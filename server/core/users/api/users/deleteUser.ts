@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IOmniUsersModel, omniUsers } from '../../models/Users';
+import { IOmniUsers, IOmniUsersModel, omniUsers } from '../../models/Users';
 
 /**
  * Given an ID, disables an User
@@ -11,7 +11,7 @@ import { IOmniUsersModel, omniUsers } from '../../models/Users';
 export default async (req: Request, res: Response) => {
   const { _id } = req.params;
   try {
-    const disabledUser = <IOmniUsersModel>await omniUsers.findByIdAndUpdate(_id, { active: false }, { new: true }).lean();
+    const disabledUser = <IOmniUsers>await omniUsers.findByIdAndUpdate(_id, { active: false }, { new: true }).lean();
     if (!disabledUser) return res.status(400).json({ message: 'Usuário não encontrado' });
     res.json({
       message: 'Usuário desabilitado com sucesso',
