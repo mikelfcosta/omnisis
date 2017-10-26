@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
+import * as cors from 'cors';
 import * as webpack from 'webpack';
 import * as webpackDevMiddleware from 'webpack-dev-middleware';
 import * as webpackHotMiddleware from 'webpack-hot-middleware';
@@ -24,7 +25,7 @@ class App {
     this.express.use(bodyParser.json({ limit: '5mb' }));
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(express.static(`${process.cwd()}/public/`));
-
+    this.express.use(cors());
   }
 
   private activateWebpack() : void {

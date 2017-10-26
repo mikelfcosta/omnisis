@@ -1,50 +1,52 @@
 import * as supertest from 'supertest';
+import * as jwt from 'jsonwebtoken';
 import App from '../../../App';
 import { OmniRouter } from '../../../Router';
-import { IOmniUsers, omniUsers } from '../models/Users';
+import { ELoginErrors, IOmniUsers, omniUsers } from '../models/Users';
 import { populateUsers } from './helpers';
 
 const agent = supertest.agent(App);
 const core = OmniRouter.coreApi;
-const path = `${core}/users/:id`;
+const path = `${core}/users/login`;
 
-describe('[Core] Get User By ID Tests', () => {
+describe('[Core] Login Tests', () => {
   let users: IOmniUsers[];
-  let userToUpdate: IOmniUsers;
-  let url: string;
+  let userToLogin: IOmniUsers;
 
   beforeEach(async () => {
     await omniUsers.remove({});
     users = <IOmniUsers[]>await populateUsers(6);
-    userToUpdate = users[1];
-    url = path.replace(':id', userToUpdate._id);
+    userToLogin = users[0];
   });
 
-  test('updates an user with correct info', (done) => {
+  test('login with correct info', (done) => {
     agent
-      .patch(url)
-      .send({ password: 'batata' })
+      .post(path)
+      .send({ username: 'ADMIN', password: 'admin' })
       .expect(200)
       .end(async (err, res) => {
         if (err) return done(err);
         try {
-          const gotUser = <IOmniUsers>await omniUsers.findById(userToUpdate._id).lean();
-          expect(userToUpdate.password).not.toEqual(gotUser.password);
-          expect(res.body._id).toEqual(gotUser._id);
+          const gotUser = <IOmniUsers>await omniUsers.findById(userToLogin._id).lean();
+          const token = res.header['x-auth'];
+          expect(token).toBeDefined();
+          const userReturned = <any>jwt.decode(token);
+          expect(userReturned._id).toEqual(gotUser._id);
           return done();
         } catch (err) {
           return done(err);
         }
       });
   });
-  test('does not updates an user with incorrect info', (done) => {
+  test('does not login with incorrect info', (done) => {
     agent
-      .patch(path)
-      .expect(400)
+      .post(path)
+      .send({ username: 'ADMIN', password: 'notcorrect' })
+      .expect(401)
       .end(async (err, res) => {
         if (err) return done(err);
         try {
-          expect(res.body).toEqual({ message: 'Usuário não encontrado' });
+          expect(res.body).toEqual({ message: ELoginErrors.IncorrectPassword });
           return done();
         } catch (err) {
           return done(err);

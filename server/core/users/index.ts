@@ -10,8 +10,8 @@ import parseQuery from '../parseQuery';
 
 const router = Router();
 
-router.get('/login', login);
-router.get('/logout', logout);
+router.post('/login', login);
+router.post('/logout', logout);
 
 router.get('', parseQuery(true), getUsers);
 router.post('/new', createUser);

@@ -1,7 +1,7 @@
 import * as supertest from 'supertest';
 import App from '../../../App';
 import { OmniRouter } from '../../../Router';
-import { IOmniUsersModel, omniUsers } from '../models/Users';
+import { IOmniUsers, omniUsers } from '../models/Users';
 import { populateUsers } from './helpers';
 
 const agent = supertest.agent(App);
@@ -9,10 +9,10 @@ const core = OmniRouter.coreApi;
 const path = `${core}/users`;
 
 describe('[Core] Get User By ID Tests', () => {
-  let users: IOmniUsersModel[];
+  let users: IOmniUsers[];
   beforeEach(async () => {
     await omniUsers.remove({});
-    users = <IOmniUsersModel[]>await populateUsers(15);
+    users = <IOmniUsers[]>await populateUsers(15);
   });
 
   test('gets only the requested users as per pagination', (done) => {

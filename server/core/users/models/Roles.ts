@@ -30,3 +30,4 @@ class Roles {
 }
 
 export const omniUsersRoles = model<IOmniUsersRolesModel>('OmniUsersRoles', Roles.schema);
+export default omniUsersRoles;
