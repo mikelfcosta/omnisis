@@ -1,7 +1,26 @@
-import { Schema, Document, Model, model } from 'mongoose';
+import { Types, Schema, Document, Model, model } from 'mongoose';
 
 export interface IOmniHolders extends Document {
-  _id: Schema.Types.ObjectId;
+  _id: string;
+  name: string;
+  type: string;
+  activeCard: string | null;
+  student?: {
+    mainCampus?: Types.ObjectId;
+    activeCourse?: Types.ObjectId;
+    activeCourseStart?: Date;
+    activeCourseEnd?: Date;
+    currentSemester?: number;
+  };
+  staff?: {
+    job?: string;
+    campus?: { type: Types.ObjectId }[];
+    worksheet?: {
+      _id: Types.ObjectId;
+      weekday: string;
+      timeslots: { _id: Types.ObjectId, start: string, end: string }[];
+    };
+  };
 }
 
 export interface IOmniHoldersModel extends Model<IOmniHolders> {}
@@ -15,7 +34,26 @@ class Holders {
 
   setSchema() {
     this.schema = new Schema({
-
+      _id: { type: String, required: true },
+      name: { type: String, required: true },
+      type: { type: String, required: true },
+      activeCard: { type: String, ref: 'OmniSmartCards' },
+      student: {
+        _id: false,
+        mainCampus: { type: Schema.Types.ObjectId },
+        activeCourse: { type: Schema.Types.ObjectId },
+        activeCourseStart: Date,
+        activeCourseEnd: Date,
+        currentSemester: Number,
+      },
+      staff: {
+        _id: false,
+        job: String,
+        campus: [{ _id: false, type: Schema.Types.ObjectId }],
+        worksheet: [
+          { weekday: String, timeslots: [{ start: String, end: String }] },
+        ],
+      },
     });
   }
 }
