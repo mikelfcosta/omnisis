@@ -8,7 +8,7 @@ const agent = supertest.agent(App);
 const core = OmniRouter.modulesApi;
 const path = `${core}/iot/cards/:_id`;
 
-describe.only('[Core] Check Card By ID Tests', () => {
+describe('[Core] Check Card By ID Tests', () => {
   let smartCards: IOmniSmartCards[];
   let urlActive: string;
   let urlInactive: string;
