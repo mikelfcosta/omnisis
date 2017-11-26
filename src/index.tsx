@@ -1,13 +1,16 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { BrowserRouter } from 'react-router-dom';
 import App from './components/core/App/App';
 import './sass/base.scss';
 
 const rootEl = document.getElementById('root');
 ReactDOM.render(
   <AppContainer>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </AppContainer>,
   rootEl,
 );
@@ -18,9 +21,10 @@ if (module.hot) {
     const NextApp = require<{ default: typeof App }>('./components/core/App/App').default;
     ReactDOM.render(
       <AppContainer>
-        <NextApp />
-      </AppContainer>
-      ,
+        <BrowserRouter>
+          <NextApp />
+        </BrowserRouter>
+      </AppContainer>,
       rootEl,
     );
   });
