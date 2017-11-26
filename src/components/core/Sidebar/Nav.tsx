@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { nav, navItem, active, navItemChildren } from './Nav.scss';
+import { nav, navItem, childrenActive, navItemChildren } from './Nav.scss';
 import { HOME, INSIGHTS, USERS } from '../../../icons';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 interface INavState {
   navigation: INavigation[];
@@ -73,8 +73,8 @@ export default class Nav extends React.Component<any, INavState> {
     return this.state.navigation.map((nav) => {
       return (
         <div key={nav.name} className={navItem}>
-          <span className={(nav.name === 'Dashboard' ? `${active}` : '')} />
-          <span className={(nav.name === 'Dashboard' ? `${active}` : '')} />
+          {/*<span className={active} />*/}
+          {/*<span className={active} />*/}
           <img srcSet={nav.icon} alt="icon" />
           <h2>{nav.name}</h2>
           {this.renderNavigationChildren(nav)}
@@ -83,12 +83,13 @@ export default class Nav extends React.Component<any, INavState> {
     });
   }
 
-  // noinspection JSMethodCanBeStatic
   private renderNavigationChildren(nav: INavigation) {
     if (nav.children) {
       const children = nav.children.map((children) => {
         return (
-          <Link to={children.link} key={children.name}>{children.name}</Link>
+          <NavLink to={children.link} key={children.name} activeClassName={childrenActive}>
+            {children.name}
+          </NavLink>
         );
       });
       return (
