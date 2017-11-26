@@ -94,7 +94,7 @@ export default class InsightsSummary extends React.Component<{}, InsightsSummary
     ];
     return areas.map((area) => {
       return (
-        <div>
+        <div key={area.text}>
           <span className={footerCircle}>
             <span />
           </span>
