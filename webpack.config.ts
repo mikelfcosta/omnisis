@@ -49,6 +49,7 @@ const config: webpack.Configuration = {
         include: [
           path.resolve(__dirname, 'src/components'),
           path.resolve(__dirname, 'src/sass'),
+          path.resolve(__dirname, 'node_modules/bootstrap/scss'),
         ],
         use: [
           { loader: 'style-loader' },
