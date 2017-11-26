@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { sidebarLogo } from './Sidebar.scss';
+const logo = require('../../../img/logo.svg');
 
 export default class SidebarLogo extends React.Component<{}, {}> {
 
@@ -10,7 +11,7 @@ export default class SidebarLogo extends React.Component<{}, {}> {
   render() {
     return (
       <div className={sidebarLogo}>
-        <img srcSet={'img/logo.svg'} />
+        <img srcSet={logo} />
       </div>
     );
   }
