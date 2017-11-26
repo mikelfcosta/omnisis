@@ -2,7 +2,22 @@
 
 .table-card {
   &-toolbar {
+    display: flex;
+    align-items: center;
     height: 64px;
+
+    img {
+      width: 36px;
+      margin-right: 16px;
+    }
+
+    input {
+      border: none;
+      background-color: transparent;
+      flex: 1 1;
+      font-size: 16px;
+      height: 32px;
+    }
   }
 
   &-pagination {
@@ -13,6 +28,7 @@
 
     div {
       margin: 0 16px;
+      height: 32px;
     }
 
     div:nth-of-type(1) {
@@ -45,6 +61,16 @@
         border-right: .25em solid transparent;
         border-top: .375em solid $color-contrast-light;
         pointer-events: none;
+      }
+    }
+
+    div:nth-of-type(3) {
+      button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        margin: 0 8px;
       }
     }
   }

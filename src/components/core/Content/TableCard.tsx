@@ -2,6 +2,7 @@ import * as React from 'react';
 import Card from './Card';
 import Table from 'reactstrap/lib/Table';
 import { tableCardToolbar, tableCardPagination } from './TableCard.scss';
+import { LISTSEARCH} from '../../../icons';
 
 interface TableCardProps {
   key: string;
@@ -30,7 +31,7 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
     return (
       <Card size={100}>
         <div className={tableCardToolbar}>
-          <img srcSet={''} alt="icon" />
+          <img srcSet={LISTSEARCH} alt="icon" />
           <input type="text" placeholder="Buscar"/>
         </div>
         <Table>
