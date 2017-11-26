@@ -9,7 +9,7 @@ export default class SmartCardsAssign extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>SmartMachinesAssign component works!</p>
       </div>
     );
   }

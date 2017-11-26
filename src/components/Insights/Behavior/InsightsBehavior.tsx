@@ -9,7 +9,7 @@ export default class InsightsBehavior extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>InsightsBehavior component works!</p>
       </div>
     );
   }

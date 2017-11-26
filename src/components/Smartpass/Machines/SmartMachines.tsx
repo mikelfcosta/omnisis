@@ -9,7 +9,7 @@ export default class SmartMachines extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>SmartMachines component works!</p>
       </div>
     );
   }

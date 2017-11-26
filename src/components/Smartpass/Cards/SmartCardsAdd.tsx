@@ -9,7 +9,7 @@ export default class SmartCardsAdd extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>SmartCardsAdd component works!</p>
       </div>
     );
   }

@@ -9,7 +9,7 @@ export default class SmartLocationsEdit extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>SmartLocationsEdit component works!</p>
       </div>
     );
   }

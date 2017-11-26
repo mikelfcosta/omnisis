@@ -9,7 +9,7 @@ export default class HoldersProfileAdd extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>HoldersProfileAdd component works!</p>
       </div>
     );
   }

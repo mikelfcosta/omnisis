@@ -9,7 +9,7 @@ export default class InsightCards extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>InsightsCards component works!</p>
       </div>
     );
   }

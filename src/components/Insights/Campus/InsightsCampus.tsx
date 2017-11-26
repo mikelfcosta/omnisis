@@ -9,7 +9,7 @@ export default class InsightsCampus extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>InsightsCampus component works!</p>
       </div>
     );
   }

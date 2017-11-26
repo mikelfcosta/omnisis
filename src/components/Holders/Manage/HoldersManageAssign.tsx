@@ -9,7 +9,7 @@ export default class HoldersManageAssign extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>HoldersManageAssign component works!</p>
       </div>
     );
   }

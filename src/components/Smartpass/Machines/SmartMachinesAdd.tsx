@@ -9,7 +9,7 @@ export default class SmartMachinesAdd extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>SmartMachinesAdd component works!</p>
       </div>
     );
   }

@@ -9,7 +9,7 @@ export default class Dash extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>Dash component works!</p>
       </div>
     );
   }

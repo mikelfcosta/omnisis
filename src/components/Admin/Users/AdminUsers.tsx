@@ -9,7 +9,7 @@ export default class AdminUsers extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>AdminUsers component works!</p>
       </div>
     );
   }

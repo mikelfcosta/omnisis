@@ -9,7 +9,7 @@ export default class HoldersGroups extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>HoldersGroups component works!</p>
       </div>
     );
   }

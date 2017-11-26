@@ -9,7 +9,7 @@ export default class SmartLocations extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>SmartLocations component works!</p>
       </div>
     );
   }

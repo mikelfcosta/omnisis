@@ -9,7 +9,7 @@ export default class HoldersDetail extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-
+        <p>HoldersDetail component works!</p>
       </div>
     );
   }
