@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { nav, navItem, active, navItemChildren } from './Nav.scss';
 import { HOME, INSIGHTS, USERS } from '../../../icons';
+import { Link } from 'react-router-dom';
 
 interface INavState {
   navigation: INavigation[];
@@ -23,8 +24,18 @@ const navigation = [
     name: 'Alunos',
     icon: USERS,
     children: [
-      { name: 'Administrar', link: '/students/admin' },
-      { name: 'Grupos e Perfis', link: '/students/groups' },
+      { name: 'Administrar', link: '/holders/manage' },
+      { name: 'Grupos', link: '/holders/groups' },
+      { name: 'Perfis', link: '/holders/profiles' },
+    ],
+  },
+  {
+    name: 'Smart Pass',
+    icon: USERS,
+    children: [
+      { name: 'Maquinas', link: '/iot/machines' },
+      { name: 'Cartões', link: '/iot/cards' },
+      { name: 'Locais', link: '/iot/locations' },
     ],
   },
   {
@@ -33,6 +44,15 @@ const navigation = [
     children: [
       { name: 'Comportamento', link: '/insights/behavior' },
       { name: 'Campus', link: '/insights/campus' },
+      { name: 'Cartões', link: '/insights/cards' },
+    ],
+  },
+  {
+    name: 'Admin',
+    icon: INSIGHTS,
+    children: [
+      { name: 'Usuários', link: '/admin/users' },
+      { name: 'Perfis', link: '/admin/roles' },
     ],
   },
 ];
@@ -68,7 +88,7 @@ export default class Nav extends React.Component<any, INavState> {
     if (nav.children) {
       const children = nav.children.map((children) => {
         return (
-          <h3 key={children.name}>{children.name}</h3>
+          <Link to={children.link} key={children.name}>{children.name}</Link>
         );
       });
       return (
