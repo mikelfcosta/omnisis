@@ -45,11 +45,18 @@ const config: webpack.Configuration = {
         include: path.resolve(__dirname, 'src'),
       },
       {
+        test: /\.css$/,
+        include: [path.resolve(__dirname, 'node_modules/bootstrap/dist/css')],
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+        ],
+      },
+      {
         test: /\.scss$/,
         include: [
           path.resolve(__dirname, 'src/components'),
           path.resolve(__dirname, 'src/sass'),
-          path.resolve(__dirname, 'node_modules/bootstrap/scss'),
         ],
         use: [
           { loader: 'style-loader' },
