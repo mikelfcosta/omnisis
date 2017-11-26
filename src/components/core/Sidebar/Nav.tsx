@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { nav, navItem, childrenActive, navItemChildren } from './Nav.scss';
+import { nav, navItem, childrenActive, navItemChildren, active } from './Nav.scss';
 import { HOME, INSIGHTS, USERS } from '../../../icons';
 import { NavLink } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ interface INavigation {
   children?: { name: string, link: string }[];
 }
 
-const navigation = [
+const navigation: INavigation[] = [
   {
     name: 'Dashboard',
     link: '/',
@@ -72,15 +72,28 @@ export default class Nav extends React.Component<any, INavState> {
   renderNavigation() {
     return this.state.navigation.map((nav) => {
       return (
-        <div key={nav.name} className={navItem}>
-          {/*<span className={active} />*/}
-          {/*<span className={active} />*/}
-          <img srcSet={nav.icon} alt="icon" />
-          <h2>{nav.name}</h2>
+        <div key={nav.name}>
+          {this.renderNavigationLink(nav)}
           {this.renderNavigationChildren(nav)}
         </div>
       );
     });
+  }
+
+  private renderNavigationLink(nav: INavigation) {
+    if (!nav.link) return (
+      <div className={navItem}>
+        <span/><span/>
+        <img srcSet={nav.icon} alt="icon" />
+        <h2>{nav.name}</h2>
+      </div>
+    );
+    return (
+      <NavLink className={navItem} activeClassName={active} exact to={nav.link}>
+        <img srcSet={nav.icon} alt="icon" />
+        <h2>{nav.name}</h2>
+      </NavLink>
+    );
   }
 
   private renderNavigationChildren(nav: INavigation) {
