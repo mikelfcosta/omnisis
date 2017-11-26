@@ -13,6 +13,9 @@
   position: relative;
 
   & > div:not(.header-backdrop) {
+    display: flex;
+    flex: 1 0 auto;
+    flex-flow: row wrap;
     z-index: $z-index-content;
   }
 }
