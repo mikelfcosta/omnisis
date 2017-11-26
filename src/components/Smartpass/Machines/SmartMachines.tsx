@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default class SmartMachine extends React.Component<{}, {}> {
+export default class SmartMachines extends React.Component<{}, {}> {
 
   componentWillMount() {}
 
