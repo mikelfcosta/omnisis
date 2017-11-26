@@ -17,9 +17,11 @@ export class OmniRouter {
   init() {
     this.omni.use(OmniRouter.coreApi, this.core);
     this.omni.use(OmniRouter.modulesApi, this.modules);
-    this.omni.get('*', (req: Request, res: Response) => {
-      res.sendFile(`${process.cwd()}/public/index.html`);
-    });
+    if (process.env.NODE_ENV === 'production') {
+      this.omni.get('*', (req: Request, res: Response) => {
+        res.sendFile(`${process.cwd()}/public/index.html`);
+      });
+    }
   }
 }
 
