@@ -7,11 +7,11 @@ import './sass/base.scss';
 
 const rootEl = document.getElementById('root');
 ReactDOM.render(
-  <AppContainer>
-    <BrowserRouter>
+  <BrowserRouter>
+    <AppContainer>
       <App />
-    </BrowserRouter>
-  </AppContainer>,
+    </AppContainer>
+  </BrowserRouter>,
   rootEl,
 );
 
