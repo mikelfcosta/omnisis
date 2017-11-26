@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default class InsightCards extends React.Component<{}, {}> {
+export default class InsightsCards extends React.Component<{}, {}> {
 
   componentWillMount() {}
 
