@@ -1,4 +1,7 @@
 import * as React from 'react';
+import InsightsSummary from './InsightsSummary';
+import LastAccesses from './LastAccesses';
+import HoldersOnCampus from './HoldersOnCampus';
 
 export default class Dash extends React.Component<{}, {}> {
 
@@ -9,7 +12,9 @@ export default class Dash extends React.Component<{}, {}> {
   render() {
     return (
       <div>
-        <p>Dash component works!</p>
+        <InsightsSummary/>
+        <LastAccesses/>
+        <HoldersOnCampus/>
       </div>
     );
   }
