@@ -14,10 +14,10 @@ export default class Smartpass extends React.Component<{}, {}> {
   render() {
     return (
       <Switch>
-        <Redirect to="/iot/machines"/>
         <Route path="/iot/machines" component={SmartMachines}/>
         <Route path="/iot/cards" component={SmartCards}/>
         <Route path="/iot/locations" component={SmartLocations}/>
+        <Redirect exact to="/iot/machines"/>
       </Switch>
     );
   }
