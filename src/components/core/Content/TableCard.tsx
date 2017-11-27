@@ -103,10 +103,9 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
 
   renderPages() {
     const selects = [];
-    for (let i = 1; i * this.state.limit <= this.props.length; i += 1) {
+    for (let i = 1; (i - 1) * this.state.limit < this.props.length; i += 1) {
       selects.push(<option key={i} value={i - 1}>{i}</option>);
     }
-    if (selects.length === 0) return (<option key={1} value={1}>1</option>);
     return selects;
   }
 
