@@ -1,16 +1,50 @@
 import * as React from 'react';
+import TableCard, { TableCardState } from '../../core/Content/TableCard';
 
-export default class SmartCards extends React.Component<{}, {}> {
+interface SmartCardsData {
+  _id: string;
+  status: string;
+  user: string | null;
+  createdBy: string;
+  updatedAt: string | null;
+}
 
-  componentWillMount() {}
+interface SmartCardsState {
+  data: SmartCardsData[];
+}
+
+const data: SmartCardsData[] = [
+  { _id: '0001200', status: 'Ativo', user: '2153112', createdBy: 'michel.costa', updatedAt: '13/11/2017' },
+  { _id: '0001199', status: 'Ativo', user: '2156312', createdBy: 'michel.costa', updatedAt: '12/11/2017' },
+  { _id: '0001198', status: 'Ativo', user: '2113215', createdBy: 'michel.costa', updatedAt: '11/11/2017' },
+  { _id: '0001197', status: 'Inativo', user: '2132155', createdBy: 'michel.costa', updatedAt: '05/11/2017' },
+  { _id: '0001196', status: 'Vazio', user: null, createdBy: 'michel.costa', updatedAt: null },
+  { _id: '0001195', status: 'Vazio', user: null, createdBy: 'michel.costa', updatedAt: null },
+  { _id: '0001194', status: 'Ativo', user: '21351312', createdBy: 'michel.costa', updatedAt: '04/11/2017' },
+  { _id: '0001193', status: 'Ativo', user: '21351321', createdBy: 'michel.costa', updatedAt: '01/11/2017' },
+  { _id: '0001192', status: 'Vazio', user: null, createdBy: 'michel.costa', updatedAt: null },
+  { _id: '0001191', status: 'Vazio', user: null, createdBy: 'michel.costa', updatedAt: null },
+];
+
+export default class SmartCards extends React.Component<{}, SmartCardsState> {
+  private headers = ['ID', 'Status', 'Usuário', 'Criado por', 'Ultima Atualização'];
+
+  componentWillMount() {
+    this.setState({ data });
+  }
 
   componentWillUnmount() {}
 
   render() {
     return (
       <div>
-        <p>SmartCards component works!</p>
+        <TableCard data={this.state.data} headers={this.headers}
+                   rowKey={'name'} length={1200} onPaginate={this.getData} />
       </div>
     );
+  }
+
+  getData(event: TableCardState) {
+    console.log(event);
   }
 }
