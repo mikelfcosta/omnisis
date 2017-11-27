@@ -37,8 +37,13 @@ export default class HoldersManage extends React.Component<{}, HoldersManageStat
   render() {
     return (
       <div>
-        <TableCard data={this.state.data} headers={this.headers} rowKey={'holderId'} length={20} />
+        <TableCard data={this.state.data} headers={this.headers}
+                   rowKey={'holderId'} length={20} onPaginate={this.getData} />
       </div>
     );
+  }
+
+  getData(event: any) {
+    console.log(event);
   }
 }

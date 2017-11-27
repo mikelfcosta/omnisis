@@ -2,19 +2,21 @@ import * as React from 'react';
 import Card from './Card';
 import Table from 'reactstrap/lib/Table';
 import { tableCardToolbar, tableCardPagination } from './TableCard.scss';
-import { LISTSEARCH} from '../../../icons';
+import { LISTSEARCH } from '../../../icons';
 
 interface TableCardProps {
   rowKey: string;
   headers: string[];
   data: any[];
   length: number;
+  onPaginate: (event: TableCardState) => any;
 }
 
 interface TableCardState {
   page: number;
   limit: number;
   order: string;
+  search: string;
 }
 
 export default class TableCard extends React.Component<TableCardProps, TableCardState> {
@@ -53,7 +55,7 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
         <div className={tableCardPagination}>
           <div>
               <label>Página</label>
-              <select value={this.state.page} onChange={event => this.setState({ page: +event.target.value })}>
+              <select value={this.state.page} onChange={event => this.onPaginate({ page: +event.target.value })}>
                 {this.renderPages()}
               </select>
           </div>
@@ -61,11 +63,11 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
             { firstPage } - { (this.state.page + 1) * this.state.limit } de { this.props.length }
           </div>
           <div>
-            <button onClick={() => this.setState({ page: this.state.page - 1 })}
+            <button onClick={() => this.onPaginate({ page: this.state.page - 1 })}
                     disabled={this.state.page === 0}>
               {'<'}
             </button>
-            <button onClick={() => this.setState({ page: this.state.page + 1 })}
+            <button onClick={() => this.onPaginate({ page: this.state.page + 1 })}
                     disabled={this.props.length <= (this.state.page + 1) * this.state.limit}>
               {'>'}
             </button>
@@ -108,6 +110,12 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
       selects.push(<option key={i} value={i - 1}>{i}</option>);
     }
     return selects;
+  }
+
+  onPaginate(change: any) {
+    this.setState(change, () => {
+      this.props.onPaginate(this.state);
+    });
   }
 
 }
