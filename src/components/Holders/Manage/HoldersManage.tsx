@@ -1,5 +1,5 @@
 import * as React from 'react';
-import TableCard from '../../core/Content/TableCard';
+import TableCard, { TableCardState } from '../../core/Content/TableCard';
 
 interface HoldersManageData {
   holderId: string;
@@ -43,7 +43,7 @@ export default class HoldersManage extends React.Component<{}, HoldersManageStat
     );
   }
 
-  getData(event: any) {
+  getData(event: TableCardState) {
     console.log(event);
   }
 }
