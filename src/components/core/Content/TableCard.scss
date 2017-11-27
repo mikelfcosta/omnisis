@@ -71,6 +71,11 @@
         cursor: pointer;
         font-weight: 600;
         margin: 0 8px;
+
+        &[disabled] {
+          cursor: default;
+          color: rgba(0, 0, 0, 0.24);
+        }
       }
     }
   }

@@ -17,12 +17,12 @@ const data: HoldersManageData[] = [
   { holderId: '20709639', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
   { holderId: '23504602', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
   { holderId: '20135403', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '23504602', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '23504602', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '20709639', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '20135403', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '20135403', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '20135403', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
+  { holderId: '25334523', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
+  { holderId: '23745354', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
+  { holderId: '23453545', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
+  { holderId: '21354145', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
+  { holderId: '24531235', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
+  { holderId: '22120545', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
 ];
 
 export default class HoldersManage extends React.Component<{}, HoldersManageState> {
@@ -37,7 +37,7 @@ export default class HoldersManage extends React.Component<{}, HoldersManageStat
   render() {
     return (
       <div>
-        <TableCard data={this.state.data} headers={this.headers} key={'holderId'} />
+        <TableCard data={this.state.data} headers={this.headers} rowKey={'holderId'} length={20} />
       </div>
     );
   }

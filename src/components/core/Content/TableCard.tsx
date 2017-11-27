@@ -5,16 +5,16 @@ import { tableCardToolbar, tableCardPagination } from './TableCard.scss';
 import { LISTSEARCH} from '../../../icons';
 
 interface TableCardProps {
-  key: string;
+  rowKey: string;
   headers: string[];
   data: any[];
+  length: number;
 }
 
 interface TableCardState {
   page: number;
   limit: number;
   order: string;
-  length: number;
 }
 
 export default class TableCard extends React.Component<TableCardProps, TableCardState> {
@@ -23,11 +23,17 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
     super(props);
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    this.setState({
+      page: 0,
+      limit: 10,
+    });
+  }
 
   componentWillUnmount() {}
 
   render() {
+    const firstPage = this.state.page * this.state.limit === 0 ? 1 : this.state.page * this.state.limit;
     return (
       <Card size={100}>
         <div className={tableCardToolbar}>
@@ -47,18 +53,22 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
         <div className={tableCardPagination}>
           <div>
               <label>Página</label>
-              <select>
-                <option value="1" selected>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+              <select value={this.state.page} onChange={event => this.setState({ page: +event.target.value })}>
+                {this.renderPages()}
               </select>
           </div>
           <div>
-            1 - 10 de 1000
+            { firstPage } - { (this.state.page + 1) * this.state.limit } de { this.props.length }
           </div>
           <div>
-            <button>{'<'}</button>
-            <button>{'>'}</button>
+            <button onClick={() => this.setState({ page: this.state.page - 1 })}
+                    disabled={this.state.page === 0}>
+              {'<'}
+            </button>
+            <button onClick={() => this.setState({ page: this.state.page + 1 })}
+                    disabled={this.props.length <= (this.state.page + 1) * this.state.limit}>
+              {'>'}
+            </button>
           </div>
         </div>
       </Card>
@@ -76,7 +86,7 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
   renderRows() {
     return this.props.data.map((row) => {
       return (
-        <tr key={row[this.props.key]}>
+        <tr key={row[this.props.rowKey]}>
           {this.renderCells(row)}
         </tr>
       );
@@ -91,4 +101,13 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
       );
     });
   }
+
+  renderPages() {
+    const selects = [];
+    for (let i = 1; i * this.state.limit <= this.props.length; i += 1) {
+      selects.push(<option key={i} value={i - 1}>{i}</option>);
+    }
+    return selects;
+  }
+
 }
