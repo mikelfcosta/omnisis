@@ -89,7 +89,7 @@ export default class Nav extends React.Component<any, INavState> {
       </div>
     );
     return (
-      <NavLink className={navItem} activeClassName={active} exact to={nav.link}>
+      <NavLink className={navItem} activeClassName={active} exact to={nav.link} style={{ cursor: 'pointer' }}>
         <img srcSet={nav.icon} alt="icon" />
         <h2>{nav.name}</h2>
       </NavLink>
