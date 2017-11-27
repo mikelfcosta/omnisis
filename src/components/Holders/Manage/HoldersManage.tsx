@@ -1,5 +1,9 @@
 import * as React from 'react';
 import TableCard, { TableCardState } from '../../core/Content/TableCard';
+import FabButton from '../../core/Elements/FabButton';
+import { ADD } from '../../../icons';
+import Modal from 'reactstrap/lib/Modal';
+import HoldersDetail from './HolderDetail/HoldersDetail';
 
 interface HoldersManageData {
   holderId: string;
@@ -11,6 +15,7 @@ interface HoldersManageData {
 
 interface HoldersManageState {
   data: HoldersManageData[];
+  modal: boolean;
 }
 
 const data: HoldersManageData[] = [
@@ -28,22 +33,41 @@ const data: HoldersManageData[] = [
 export default class HoldersManage extends React.Component<{}, HoldersManageState> {
   private headers = ['Matrícula', 'Nome', 'Campus', 'Curso', 'Semestre'];
 
-  componentWillMount() {
-    this.setState({ data });
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      data,
+      modal: false,
+    };
   }
 
-  componentWillUnmount() {}
+  componentWillMount() { }
+
+  componentWillUnmount() {
+    console.log('Unmounting component');
+  }
 
   render() {
     return (
       <div>
         <TableCard data={this.state.data} headers={this.headers}
-                   rowKey={'holderId'} length={20} onPaginate={this.getData} />
+                   rowKey={'holderId'} length={20} onPaginate={this.getData.bind(this)} />
+        <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
+        <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
+          <HoldersDetail toggle={this.toggle.bind(this)}/>
+        </Modal>
       </div>
     );
   }
 
   getData(event: TableCardState) {
     console.log(event);
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+    });
   }
 }
