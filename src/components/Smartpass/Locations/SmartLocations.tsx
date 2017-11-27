@@ -33,7 +33,7 @@ export default class SmartLocations extends React.Component<{}, SmartLocationsSt
     return (
       <div>
         <TableCard data={this.state.data} headers={this.headers}
-                   rowKey={'_id'} length={12} onPaginate={this.getData} />
+                   rowKey={'_id'} length={4} onPaginate={this.getData} />
       </div>
     );
   }
