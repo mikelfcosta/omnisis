@@ -30,28 +30,8 @@
     }
 
     &:hover {
+      text-decoration: none;
       h2 { color: white };
-    }
-
-    .active {
-      span:nth-of-type(1) {
-        background-color: white;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: -16px;
-        width: 5px;
-      }
-
-      span:nth-of-type(2) {
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 35%);
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        height: 60px;
-        left: -16px;
-        width: 100%;
-      }
     }
 
     &-children {
@@ -74,12 +54,41 @@
 
         &:hover {
           color: white;
-        }
-
-        .children-active {
-          color: white;
+          text-decoration: none;
         }
       }
     }
   }
+}
+
+
+.active {
+  h2 {
+    color: white !important;
+    font-weight: 800 !important;
+  }
+
+  span:nth-of-type(1) {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -16px;
+    width: 5px;
+  }
+
+  span:nth-of-type(2) {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 35%);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 60px;
+    left: -16px;
+    width: 100%;
+  }
+}
+
+.children-active {
+  color: white !important;
+  font-weight: 800 !important;
 }
