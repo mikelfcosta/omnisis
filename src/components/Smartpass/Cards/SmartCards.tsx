@@ -39,7 +39,7 @@ export default class SmartCards extends React.Component<{}, SmartCardsState> {
     return (
       <div>
         <TableCard data={this.state.data} headers={this.headers}
-                   rowKey={'name'} length={1200} onPaginate={this.getData} />
+                   rowKey={'_id'} length={1200} onPaginate={this.getData} />
       </div>
     );
   }
