@@ -3,6 +3,7 @@ import Card from './Card';
 import Table from 'reactstrap/lib/Table';
 import { tableCardToolbar, tableCardPagination } from './TableCard.scss';
 import { LISTSEARCH } from '../../../icons';
+import { debounce } from 'lodash';
 
 interface TableCardProps {
   rowKey: string;
@@ -15,7 +16,7 @@ interface TableCardProps {
 interface TableCardState {
   page: number;
   limit: number;
-  order: string;
+  order?: string;
   search: string;
 }
 
@@ -23,13 +24,7 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
 
   constructor(props: TableCardProps) {
     super(props);
-  }
-
-  componentWillMount() {
-    this.setState({
-      page: 0,
-      limit: 10,
-    });
+    this.state = { search: '', page: 0, limit: 10 };
   }
 
   componentWillUnmount() {}
@@ -40,7 +35,8 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
       <Card size={100}>
         <div className={tableCardToolbar}>
           <img srcSet={LISTSEARCH} alt="icon" />
-          <input type="text" placeholder="Buscar"/>
+          <input type="text" placeholder="Buscar" value={this.state.search}
+                 onChange={event => this.onPaginate({ search: event.target.value })}/>
         </div>
         <Table>
           <thead>
