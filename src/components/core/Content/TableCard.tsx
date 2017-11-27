@@ -13,7 +13,7 @@ interface TableCardProps {
   onPaginate: (event: TableCardState) => any;
 }
 
-interface TableCardState {
+export interface TableCardState {
   page: number;
   limit: number;
   order?: string;
@@ -31,6 +31,7 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
 
   render() {
     const firstPage = this.state.page * this.state.limit === 0 ? 1 : this.state.page * this.state.limit;
+    const showingMax = (this.state.page + 1) * this.state.limit <= this.props.length ? (this.state.page + 1) * this.state.limit : this.props.length;
     return (
       <Card size={100}>
         <div className={tableCardToolbar}>
@@ -56,7 +57,7 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
               </select>
           </div>
           <div>
-            { firstPage } - { (this.state.page + 1) * this.state.limit } de { this.props.length }
+            { firstPage } - { showingMax } de { this.props.length }
           </div>
           <div>
             <button onClick={() => this.onPaginate({ page: this.state.page - 1 })}
@@ -105,6 +106,7 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
     for (let i = 1; i * this.state.limit <= this.props.length; i += 1) {
       selects.push(<option key={i} value={i - 1}>{i}</option>);
     }
+    if (selects.length === 0) return (<option key={1} value={1}>1</option>);
     return selects;
   }
 
