@@ -4,6 +4,7 @@ export interface IOmniHolders extends Document {
   _id: string;
   name: string;
   type: string;
+  group: string;
   activeCard: string | null;
   student?: {
     mainCampus?: Types.ObjectId;
