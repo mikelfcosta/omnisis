@@ -14,7 +14,7 @@ export interface IOmniSmartCardsLogs extends Document {
 
 export interface IOmniSmartCardsLogsModel extends Model<IOmniSmartCardsLogs> {
   createLog: (user: IOmniHolders, machine: string) => Promise<void>;
-  isInside: (card: string, user: string) => boolean;
+  isInside: (card: string, user: string) => Promise<boolean>;
 }
 
 class SmartCards {
@@ -54,11 +54,11 @@ class SmartCards {
     }
   }
 
-  public static async isInside(this: IOmniSmartCardsLogsModel, card: string, user: string): boolean {
+  public static async isInside(this: IOmniSmartCardsLogsModel, card: string, user: string): Promise<boolean> {
     try {
       const log = await this.findOne({ holderCard: card, holderId: user }).sort('-timestamp');
-      if (!log) return false;
-      else return log.accessType === 'in';
+      if (!log) return Promise.resolve(false);
+      else return Promise.resolve(log.accessType === 'in');
     } catch (err) {
       return Promise.reject(err);
     }
