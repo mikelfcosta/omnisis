@@ -1,0 +1,105 @@
+@import "../../sass/variables";
+
+.header {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  height: 32px;
+
+  &-title {
+    font-weight: bold;
+    font-size: 24px;
+    color: #1F2341;
+    flex: 0.15 1;
+    padding: 0;
+    margin: 8px 16px;
+  }
+
+  &-links {
+    display: flex;
+    flex: 0.4 1;
+    list-style: none;
+    margin: 0;
+
+    li {
+      margin: 0 24px;
+      color: #1FB0B3;
+      cursor: pointer;
+    }
+
+    &-active {
+      border-bottom: 3px solid #DA483C;
+    }
+  }
+}
+
+.chart {
+  display: flex;
+  flex: 1 1;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  display: flex;
+  flex: 1 1;
+  flex-flow: row wrap;
+  margin-bottom: 16px;
+
+  &-circle {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #004751;
+    position: absolute;
+    left: -8px;
+    top: 18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      width: 12px;
+      height: 12px;
+      background-color: #E66B48;
+      border-radius: 50%;
+    }
+  }
+
+  div {
+    display: flex;
+    flex-flow: column;
+    margin: 8px 32px;
+    padding-left: 8px;
+    position: relative;
+
+    h1 {
+      font-size: 48px;
+      margin: 0;
+      padding: 0;
+    }
+
+    h3 {
+      max-width: 150px;
+      font-size: 24px;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  div:nth-of-type(1) {
+    h1 { color: #48D2A0 }
+  }
+
+  div:nth-of-type(2) {
+    h1 { color: #F8C51C }
+  }
+
+  div:nth-of-type(3) {
+    h1 { color: #F54B5E }
+  }
+}

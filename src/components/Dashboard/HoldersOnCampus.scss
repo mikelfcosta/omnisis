@@ -1,0 +1,15 @@
+.chart {
+  display: flex;
+  flex: 1 1;
+  height: 225px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.table {
+  & > thead > tr > th {
+    border-top: none;
+  }
+}

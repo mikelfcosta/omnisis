@@ -4,7 +4,6 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const config: webpack.Configuration = {
   entry: [
-    'webpack-hot-middleware/client?reload=true',
     'react-hot-loader/patch',
     './src/index.tsx',
   ],
@@ -23,6 +22,9 @@ const config: webpack.Configuration = {
   },
 
   plugins: [
+    new webpack.WatchIgnorePlugin([
+      /css\.d\.ts$/,
+    ]),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
@@ -41,6 +43,14 @@ const config: webpack.Configuration = {
         ],
         exclude: path.resolve(__dirname, 'node_modules'),
         include: path.resolve(__dirname, 'src'),
+      },
+      {
+        test: /\.css$/,
+        include: [path.resolve(__dirname, 'node_modules/bootstrap/dist/css')],
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+        ],
       },
       {
         test: /\.scss$/,
@@ -66,10 +76,28 @@ const config: webpack.Configuration = {
         test: /\.js$/,
         loader: 'source-map-loader',
       },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader',
+        ],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          'file-loader',
+        ],
+      },
     ],
   },
   devServer: {
+    historyApiFallback: true,
     hot: true,
+    proxy: {
+      '/api/*': {
+        target: 'http://localhost:3000/',
+      },
+    },
   },
 };
 

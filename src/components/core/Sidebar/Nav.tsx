@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { nav, navItem, active, navItemChildren } from './Nav.scss';
+import { nav, navItem, childrenActive, navItemChildren, active } from './Nav.scss';
 import { HOME, INSIGHTS, USERS } from '../../../icons';
+import { NavLink } from 'react-router-dom';
 
 interface INavState {
   navigation: INavigation[];
@@ -13,7 +14,7 @@ interface INavigation {
   children?: { name: string, link: string }[];
 }
 
-const navigation = [
+const navigation: INavigation[] = [
   {
     name: 'Dashboard',
     link: '/',
@@ -23,8 +24,18 @@ const navigation = [
     name: 'Alunos',
     icon: USERS,
     children: [
-      { name: 'Administrar', link: '/students/admin' },
-      { name: 'Grupos e Perfis', link: '/students/groups' },
+      { name: 'Administrar', link: '/holders/manage' },
+      { name: 'Grupos', link: '/holders/groups' },
+      { name: 'Perfis', link: '/holders/profiles' },
+    ],
+  },
+  {
+    name: 'Smart Pass',
+    icon: USERS,
+    children: [
+      { name: 'Maquinas', link: '/iot/machines' },
+      { name: 'Cartões', link: '/iot/cards' },
+      { name: 'Locais', link: '/iot/locations' },
     ],
   },
   {
@@ -33,6 +44,15 @@ const navigation = [
     children: [
       { name: 'Comportamento', link: '/insights/behavior' },
       { name: 'Campus', link: '/insights/campus' },
+      { name: 'Cartões', link: '/insights/cards' },
+    ],
+  },
+  {
+    name: 'Admin',
+    icon: INSIGHTS,
+    children: [
+      { name: 'Usuários', link: '/admin/users' },
+      { name: 'Perfis', link: '/admin/roles' },
     ],
   },
 ];
@@ -52,23 +72,37 @@ export default class Nav extends React.Component<any, INavState> {
   renderNavigation() {
     return this.state.navigation.map((nav) => {
       return (
-        <div key={nav.name} className={navItem}>
-          <span className={(nav.name === 'Dashboard' ? `${active}` : '')} />
-          <span className={(nav.name === 'Dashboard' ? `${active}` : '')} />
-          <img srcSet={nav.icon} alt="icon" />
-          <h2>{nav.name}</h2>
+        <div key={nav.name}>
+          {this.renderNavigationLink(nav)}
           {this.renderNavigationChildren(nav)}
         </div>
       );
     });
   }
 
-  // noinspection JSMethodCanBeStatic
+  private renderNavigationLink(nav: INavigation) {
+    if (!nav.link) return (
+      <div className={navItem}>
+        <span/><span/>
+        <img srcSet={nav.icon} alt="icon" />
+        <h2>{nav.name}</h2>
+      </div>
+    );
+    return (
+      <NavLink className={navItem} activeClassName={active} exact to={nav.link} style={{ cursor: 'pointer' }}>
+        <img srcSet={nav.icon} alt="icon" />
+        <h2>{nav.name}</h2>
+      </NavLink>
+    );
+  }
+
   private renderNavigationChildren(nav: INavigation) {
     if (nav.children) {
       const children = nav.children.map((children) => {
         return (
-          <h3 key={children.name}>{children.name}</h3>
+          <NavLink to={children.link} key={children.name} activeClassName={childrenActive}>
+            {children.name}
+          </NavLink>
         );
       });
       return (

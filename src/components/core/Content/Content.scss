@@ -6,13 +6,18 @@
   display: flex;
   flex: 1 0 auto;
   flex-flow: row wrap;
-  justify-content: space-around;
   min-height: calc(100vh - #{$size-header-height});
   margin-left: $size-sidebar-width;
   margin-top: $size-header-height;
   padding: 8px;
   position: relative;
-  z-index: $z-index-content;
+
+  & > div:not(.header-backdrop) {
+    display: flex;
+    flex: 1 0 auto;
+    flex-flow: row wrap;
+    z-index: $z-index-content;
+  }
 }
 
 .header-backdrop {
