@@ -7,8 +7,8 @@ export const PRIVATE_KEY = '7ec8336709bf8a8d71d0ffff69127903';
 
 const router = Router();
 
-router.get('/cards/:_id', checkCardById);
 router.get('/cards/search/:_id', searchCardById);
 router.get('/cards/new/:_id', createTag);
+router.get('/cards/:_id', checkCardById);
 
 export default router;
