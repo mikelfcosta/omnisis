@@ -14,7 +14,7 @@ export interface IOmniSmartCardsLogs extends Document {
 
 export interface IOmniSmartCardsLogsModel extends Model<IOmniSmartCardsLogs> {
   createLog: (user: IOmniHolders, machine: string) => Promise<void>;
-  hasEnteredToday: (card: string, user: string) => Promise<IOmniSmartCardsLogs | null>;
+  isInside: (card: string, user: string) => boolean;
 }
 
 class SmartCards {
@@ -36,10 +36,10 @@ class SmartCards {
     });
   }
 
-  public async createLog(this: IOmniSmartCardsLogsModel, user: IOmniHolders, machine: string): Promise<void> {
+  public static async createLog(this: IOmniSmartCardsLogsModel, user: IOmniHolders, machine: string): Promise<void> {
     try {
       if (!user.activeCard) return Promise.reject('No card active');
-      const hasEnteredToday = await this.hasEnteredToday(user.activeCard, user._id);
+      const hasEnteredToday = await this.isInside(user.activeCard, user._id);
       const log = new this({
         machineId: machine,
         machineLocation: null,
@@ -54,9 +54,11 @@ class SmartCards {
     }
   }
 
-  public async hasEnteredToday(this: IOmniSmartCardsLogsModel, card: string, user: string): Promise<IOmniSmartCardsLogs | null> {
+  public static async isInside(this: IOmniSmartCardsLogsModel, card: string, user: string): boolean {
     try {
-      return await this.findOne({ holderCard: card, holderId: user }).sort('-timestamp');
+      const log = await this.findOne({ holderCard: card, holderId: user }).sort('-timestamp');
+      if (!log) return false;
+      else return log.accessType === 'in';
     } catch (err) {
       return Promise.reject(err);
     }
@@ -66,5 +68,5 @@ class SmartCards {
 const schema = new SmartCards().schema;
 schema.loadClass(SmartCards);
 
-export const omniSmartCards: IOmniSmartCardsLogsModel = model<IOmniSmartCardsLogs, IOmniSmartCardsLogsModel>('OmniSmartCards', schema);
-export default omniSmartCards;
+export const omniSmartCardsLogs: IOmniSmartCardsLogsModel = model<IOmniSmartCardsLogs, IOmniSmartCardsLogsModel>('OmniSmartCardsLogs', schema);
+export default omniSmartCardsLogs;

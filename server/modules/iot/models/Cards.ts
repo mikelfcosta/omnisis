@@ -1,5 +1,6 @@
 import { Schema, Document, model, Model, Types } from 'mongoose';
 import { IOmniHolders, default as omniHolders } from '../../holders/models/Holders';
+import omniSmartCardsLogs from './AccessLogs';
 
 export interface IOmniSmartCards extends Document {
   _id: string;
@@ -39,9 +40,13 @@ class SmartCards {
   public static async checkStudent(this: IOmniSmartCardsModel, cardId: string) {
     const card = <IOmniSmartCards>await this.findById(cardId).populate('student');
     if (card) {
-      // const isInside = await omniHolders
+      const student = <IOmniHolders>card.student;
+      if (!student) return Promise.reject('Card has no student assigned');
+      const isInside = await omniSmartCardsLogs.isInside(cardId, student._id);
+      await omniSmartCardsLogs.createLog(student, 'machineId');
       return {
-        student: (<IOmniHolders>card.student).name,
+        isInside,
+        student: student.name,
         active: card.active,
         assigned: card.assigned,
         lastAssignedAt: card.lastAssignedAt,
