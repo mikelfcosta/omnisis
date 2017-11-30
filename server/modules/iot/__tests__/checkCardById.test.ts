@@ -3,16 +3,20 @@ import App from '../../../App';
 import { OmniRouter } from '../../../Router';
 import { ECardErrors, IOmniSmartCards, omniSmartCards } from '../models/Cards';
 import { populateCards } from './helpers';
+import { PRIVATE_KEY } from '../index';
+import omniHolders from '../../holders/models/Holders';
+import normalizeName from '../common/normalizeName';
 
 const agent = supertest.agent(App);
 const core = OmniRouter.modulesApi;
-const path = `${core}/iot/cards/:_id`;
+const path = `${core}/iot/cards/:_id?private_key=${PRIVATE_KEY}`;
 
 describe('[Core] Check Card By ID Tests', () => {
   let smartCards: IOmniSmartCards[];
   let urlActive: string;
   let urlInactive: string;
   let urlUnassigned: string;
+  let urlNoCard: string;
 
   beforeEach(async () => {
     await omniSmartCards.remove({});
@@ -20,6 +24,7 @@ describe('[Core] Check Card By ID Tests', () => {
     urlActive = path.replace(':_id', smartCards[0]._id);
     urlInactive = path.replace(':_id', smartCards[1]._id);
     urlUnassigned = path.replace(':_id', smartCards[2]._id);
+    urlNoCard = path.replace(':_id', 'siojdaoijsdioasjdoiasj');
     return Promise.resolve();
   });
 
@@ -30,11 +35,13 @@ describe('[Core] Check Card By ID Tests', () => {
       .end(async (err, res) => {
         if (err) return done(err);
         try {
+          const student = await omniHolders.findById(<string>smartCards[0].student);
+          if (!student) return Promise.reject('No user found');
+          const studentName = normalizeName(student.name);
+
           const expected = {
-            student: smartCards[0].student,
-            lastAssignedBy: smartCards[0].lastAssignedBy,
-            active: smartCards[0].active,
-            assigned: smartCards[0].assigned,
+            line1: studentName,
+            access: '1',
           };
           expect(res.body).toMatchObject(expected);
           return done();
@@ -43,18 +50,20 @@ describe('[Core] Check Card By ID Tests', () => {
         }
       });
   });
-  test('correctly gets a assigned and inactive user with correct info', (done) => {
+  test('correctly gets a message on inactive user with correct info', (done) => {
     agent
       .get(urlInactive)
       .expect(200)
       .end(async (err, res) => {
         if (err) return done(err);
         try {
+          const student = await omniHolders.findById(<string>smartCards[1].student);
+          if (!student) return Promise.reject('No user found');
+          const studentName = normalizeName(student.name);
+
           const expected = {
-            student: smartCards[1].student,
-            lastAssignedBy: smartCards[1].lastAssignedBy,
-            active: smartCards[1].active,
-            assigned: smartCards[1].assigned,
+            line1: studentName,
+            access: '0',
           };
           expect(res.body).toMatchObject(expected);
           return done();
@@ -63,33 +72,36 @@ describe('[Core] Check Card By ID Tests', () => {
         }
       });
   });
-  test('correctly gets a unassigned card with correct info', (done) => {
-    agent
-      .get(urlUnassigned)
-      .expect(200)
-      .end(async (err, res) => {
-        if (err) return done(err);
-        try {
-          const expected = {
-            lastAssignedBy: smartCards[2].lastAssignedBy,
-            active: smartCards[2].active,
-            assigned: smartCards[2].assigned,
-          };
-          expect(res.body).toMatchObject(expected);
-          return done();
-        } catch (err) {
-          return done(err);
-        }
-      });
-  });
-  test('correctly returns a message if the card is not found', (done) => {
+  test('correctly gets a unrecognized message on card with no user', (done) => {
     agent
       .get(path)
       .expect(400)
       .end(async (err, res) => {
         if (err) return done(err);
         try {
-          expect(res.body).toEqual({ message: ECardErrors.NoCardFound });
+          const expected = {
+            line1: 'CARTAO INVALIDO ',
+            access: '0',
+          };
+          expect(res.body).toEqual(expected);
+          return done();
+        } catch (err) {
+          return done(err);
+        }
+      });
+  });
+  test('correctly gets a unrecognized message on card not identified', (done) => {
+    agent
+      .get(urlNoCard)
+      .expect(400)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        try {
+          const expected = {
+            line1: 'CARTAO INVALIDO ',
+            access: '0',
+          };
+          expect(res.body).toMatchObject(expected);
           return done();
         } catch (err) {
           return done(err);
