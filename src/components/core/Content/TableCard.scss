@@ -1,0 +1,82 @@
+@import "../../../sass/variables";
+
+.table-card {
+  &-toolbar {
+    display: flex;
+    align-items: center;
+    height: 64px;
+
+    img {
+      width: 36px;
+      margin-right: 16px;
+    }
+
+    input {
+      border: none;
+      background-color: transparent;
+      flex: 1 1;
+      font-size: 16px;
+      height: 32px;
+    }
+  }
+
+  &-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 64px;
+
+    div {
+      margin: 0 16px;
+      height: 32px;
+    }
+
+    div:nth-of-type(1) {
+      position: relative;
+
+      select {
+        margin-left: 4px;
+        border: none;
+        border-bottom: 1px solid $color-contrast-light;
+        background-color: transparent;
+        -moz-appearance: none;
+        -webkit-appearance:none;
+        padding: 0 12px 0 4px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      &:after {
+        position: absolute;
+        top: 8px;
+        right: 0;
+        /* Styling the down arrow */
+        width: 0;
+        height: 0;
+        padding: 0;
+        content: '';
+        border-left: .25em solid transparent;
+        border-right: .25em solid transparent;
+        border-top: .375em solid $color-contrast-light;
+        pointer-events: none;
+      }
+    }
+
+    div:nth-of-type(3) {
+      button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        margin: 0 8px;
+
+        &[disabled] {
+          cursor: default;
+          color: rgba(0, 0, 0, 0.24);
+        }
+      }
+    }
+  }
+}

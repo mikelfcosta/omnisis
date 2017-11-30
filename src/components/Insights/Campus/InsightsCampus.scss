@@ -1,0 +1,10 @@
+.chart {
+  display: flex;
+  flex: 1 1;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+}

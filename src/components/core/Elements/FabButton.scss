@@ -1,0 +1,23 @@
+@import "../../../sass/variables";
+
+.fab-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 64px;
+  height: 64px;
+  background-color: $color-secundary;
+  border-radius: 50%;
+  bottom: 32px;
+  right: 32px;
+  cursor: pointer;
+  box-shadow: $whiteframe-shadow-2dp;
+  transition: all 300ms ease;
+  user-select: none;
+
+  &:hover {
+    background-color: lighten($color-secundary, 5);
+    box-shadow: $whiteframe-shadow-4dp;
+  }
+}

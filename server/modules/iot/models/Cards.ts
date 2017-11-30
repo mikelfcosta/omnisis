@@ -14,7 +14,7 @@ export interface IOmniSmartCardsModel extends Model<IOmniSmartCards> {
 }
 
 export enum ECardErrors {
-  NoCardFound = 'Cartão não identificado',
+  NoCardFound = 'CARTAO INVALIDO ',
 }
 
 class SmartCards {
@@ -28,7 +28,7 @@ class SmartCards {
     this.schema = new Schema({
       _id: { type: String, required: true },
       assigned: { type: Boolean, default: false },
-      student: String,
+      student: { type: String, ref: 'OmniHolders' },
       active: { type: Boolean, default: false },
       lastAssignedBy: { type: String, ref: 'OmniUsers' },
       lastAssignedAt: Date,
@@ -36,9 +36,9 @@ class SmartCards {
   }
 
   public static async checkStudent(this: IOmniSmartCardsModel, cardId: string) {
-    const card = await this.findById(cardId);
+    const card = await this.findById(cardId).populate('student');
     if (card) {
-      return { student: card.student, active: card.active, assigned: card.assigned, lastAssignedAt: card.lastAssignedAt, lastAssignedBy: card.lastAssignedBy };
+      return { student: (<any>card.student).name, active: card.active, assigned: card.assigned, lastAssignedAt: card.lastAssignedAt, lastAssignedBy: card.lastAssignedBy };
     } else {
       return Promise.reject(ECardErrors.NoCardFound);
     }

@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { content, headerBackdrop } from './Content.scss';
-import Card from './Card';
+import { Switch, Route } from 'react-router-dom';
+import Dash from '../../Dashboard/Dash';
+import Smartpass from '../../Smartpass/Smartpass';
+import Holders from '../../Holders/Holders';
+import Insights from '../../Insights/Insights';
+import Admin from '../../Admin/Admin';
 
 export default class Content extends React.Component<{}, {}> {
 
@@ -12,15 +17,13 @@ export default class Content extends React.Component<{}, {}> {
     return (
       <div className={content}>
         <div className={headerBackdrop} />
-        <Card height={500} size={100}>
-          <p>Resumo</p>
-        </Card>
-        <Card height={300} size={65}>
-          <p>Últimos Acessos</p>
-        </Card>
-        <Card height={300} size={35}>
-          <p>Alunos no Campos</p>
-        </Card>
+        <Switch>
+          <Route exact path="/" component={Dash}/>
+          <Route path="/iot" component={Smartpass}/>
+          <Route path="/holders" component={Holders}/>
+          <Route path="/insights" component={Insights}/>
+          <Route path="/admin" component={Admin}/>
+        </Switch>
       </div>
     );
   }
