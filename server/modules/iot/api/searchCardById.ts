@@ -22,7 +22,7 @@ export default async (req: Request, res: Response) => {
 
     if (!card) return res.json({ line1: 'OPS! ESTE CARTAO', line2: 'E INVALIDO...   ' });
     else if (card.assigned) return res.json({ line1: 'OPS! ESTE CARTAO', line2: 'ESTA EM USO...  ' });
-    else return res.json({ line1: 'CODIGO: ', line2: normalizeLength(card._id) });
+    else return res.json({ line1: 'CODIGO:         ', line2: normalizeLength(card._id) });
   } catch (err) {
     if (err === ECardErrors.NoCardFound) return res.status(400).json({ message: ECardErrors.NoCardFound });
     res.status(500).json({ err });
