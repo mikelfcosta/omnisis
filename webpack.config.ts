@@ -18,7 +18,7 @@ const config: webpack.Configuration = {
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.css', '.scss'],
+    extensions: ['.tsx', '.scss'],
   },
 
   plugins: [
@@ -41,7 +41,7 @@ const config: webpack.Configuration = {
           'react-hot-loader/webpack',
           'awesome-typescript-loader',
         ],
-        exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'server')],
+        exclude: [/node_modules/, /server/],
         include: path.resolve(__dirname, 'src'),
       },
       {
