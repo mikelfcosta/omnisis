@@ -32,7 +32,7 @@ describe('[Core] Check Card By ID Tests', () => {
         if (err) return done(err);
         try {
           const expected = {
-            line1: 'CODIGO: ',
+            line1: 'CODIGO:         ',
             line2: smartCards[2]._id,
           };
           expect(res.body).toMatchObject(expected);

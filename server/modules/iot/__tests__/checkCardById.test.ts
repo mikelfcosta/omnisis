@@ -41,6 +41,7 @@ describe('[Core] Check Card By ID Tests', () => {
 
           const expected = {
             line1: studentName,
+            line2: 'ACESSO LIBERADO!',
             access: '1',
           };
           expect(res.body).toMatchObject(expected);
@@ -63,6 +64,7 @@ describe('[Core] Check Card By ID Tests', () => {
 
           const expected = {
             line1: studentName,
+            line2: 'ACESSO NEGADO!!!',
             access: '0',
           };
           expect(res.body).toMatchObject(expected);
@@ -81,6 +83,7 @@ describe('[Core] Check Card By ID Tests', () => {
         try {
           const expected = {
             line1: 'CARTAO INVALIDO ',
+            line2: 'ACESSO NEGADO!!!',
             access: '0',
           };
           expect(res.body).toEqual(expected);
@@ -99,6 +102,7 @@ describe('[Core] Check Card By ID Tests', () => {
         try {
           const expected = {
             line1: 'CARTAO INVALIDO ',
+            line2: 'ACESSO NEGADO!!!',
             access: '0',
           };
           expect(res.body).toMatchObject(expected);
