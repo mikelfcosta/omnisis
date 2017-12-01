@@ -18,7 +18,7 @@ export default async (req: Request, res: Response) => {
 
   try {
     const card = await omniSmartCards.findById(_id);
-    if (card) return res.json({ line1: 'OPS! CARTAO ', line2: 'JA CADASTRADO ' });
+    if (card) return res.json({ line1: 'OPS! CARTAO     ', line2: 'JA CADASTRADO   ' });
 
     const newCard = new omniSmartCards({
       _id,
@@ -27,7 +27,7 @@ export default async (req: Request, res: Response) => {
       active: true,
     });
     await newCard.save();
-    res.json({ line1: 'CADASTRADO ', line2: 'COM SUCESSO ' });
+    res.json({ line1: 'CADASTRADO      ', line2: 'COM SUCESSO     ' });
   } catch (err) {
     if (err) return res.status(500).json({ line1: 'OCORREU UM ERRO ', line2: 'NO CADASTRO... ' });
   }

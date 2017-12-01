@@ -21,15 +21,15 @@ export default async (req: Request, res: Response) => {
   try {
     const user = await omniSmartCards.checkStudent(_id);
 
-    if (!user) res.json({ line1: 'CARTAO INVALIDO ', access: '0' });
+    if (!user) res.json({ line1: 'CARTAO INVALIDO ', line2: 'ACESSO NEGADO!!!', access: '0' });
 
     const studentName = normalizeName(user.student);
 
-    const response = { line1: studentName, access: user.active ? '1' : '0' };
+    const response = { line1: studentName, line2: user.active ? 'ACESSO LIBERADO!' : 'ACESSO NEGADO!!!', access: user.active ? '1' : '0' };
 
     res.json(response);
   } catch (err) {
-    if (err === ECardErrors.NoCardFound) return res.status(400).json({ line1: ECardErrors.NoCardFound, access: '0' });
+    if (err === ECardErrors.NoCardFound) return res.status(400).json({ line1: ECardErrors.NoCardFound, line2: 'ACESSO NEGADO!!!', access: '0' });
     console.log(err);
     res.status(500).json({ err });
   }
