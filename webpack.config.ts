@@ -41,7 +41,7 @@ const config: webpack.Configuration = {
           'react-hot-loader/webpack',
           'awesome-typescript-loader',
         ],
-        exclude: path.resolve(__dirname, 'node_modules'),
+        exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'server')],
         include: path.resolve(__dirname, 'src'),
       },
       {
