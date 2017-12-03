@@ -1,5 +1,9 @@
 import * as React from 'react';
 import TableCard, { TableCardState } from '../../core/Content/TableCard';
+import SmartCardsAdd from './SmartCardsAdd';
+import FabButton from '../../core/Elements/FabButton';
+import { ADD } from '../../../icons';
+import Modal from 'reactstrap/lib/Modal';
 
 interface SmartCardsData {
   _id: string;
@@ -11,6 +15,7 @@ interface SmartCardsData {
 
 interface SmartCardsState {
   data: SmartCardsData[];
+  modal: boolean;
 }
 
 const data: SmartCardsData[] = [
@@ -40,11 +45,21 @@ export default class SmartCards extends React.Component<{}, SmartCardsState> {
       <div>
         <TableCard data={this.state.data} headers={this.headers}
                    rowKey={'_id'} length={1200} onPaginate={this.getData} />
+        <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
+        <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
+          <SmartCardsAdd toggle={this.toggle.bind(this)} />
+        </Modal>
       </div>
     );
   }
 
   getData(event: TableCardState) {
     console.log(event);
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+    });
   }
 }
