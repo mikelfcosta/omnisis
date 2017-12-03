@@ -13,6 +13,7 @@ import machinesSeed from './seed/machinesSeed';
 import cardsSeed from './seed/cardsSeed';
 import profilesSeed from './seed/profilesSeed';
 import { holdersSeed } from './seed/holdersSeed';
+import cardAssignSeed from './seed/cardAssignSeed';
 
 (<any>mongoose).Promise = Promise;
 mongoose.connect('mongodb://localhost:27017/iot', { useMongoClient: true });
@@ -36,6 +37,7 @@ export async function mainSeed() {
     await cardsSeed();
     await profilesSeed();
     await holdersSeed();
+    await cardAssignSeed();
   } catch (err) {
     return Promise.reject(err);
   }
