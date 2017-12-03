@@ -24,6 +24,11 @@ export async function locationsSeed() {
       });
       locationsToSave.push(await mainLocation.save());
       locationsToSave.push(await secondaryLocation.save());
+      await models.omniCampi.findByIdAndUpdate(campi[i]._id, {
+        $push: {
+          locations: { $each: [mainLocation._id, secondaryLocation._id] },
+        },
+      });
     }
     return Promise.all(locationsToSave);
   } catch (err) {
