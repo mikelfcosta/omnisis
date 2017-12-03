@@ -1,5 +1,9 @@
 import * as React from 'react';
 import TableCard, { TableCardState } from '../../core/Content/TableCard';
+import FabButton from '../../core/Elements/FabButton';
+import { ADD } from '../../../icons';
+import Modal from 'reactstrap/lib/Modal';
+import SmartLocationsEdit from './SmartLocationsEdit';
 
 interface SmartLocationsData {
   _id: string;
@@ -11,6 +15,7 @@ interface SmartLocationsData {
 
 interface SmartLocationsState {
   data: SmartLocationsData[];
+  modal: boolean;
 }
 
 const data: SmartLocationsData[] = [
@@ -23,9 +28,16 @@ const data: SmartLocationsData[] = [
 export default class SmartLocations extends React.Component<{}, SmartLocationsState> {
   private headers = ['ID', 'Local', 'Maquinas', 'Criado por', 'Ultima Atualização'];
 
-  componentWillMount() {
-    this.setState({ data });
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      data,
+      modal: false,
+    };
   }
+
+  componentWillMount() {}
 
   componentWillUnmount() {}
 
@@ -34,11 +46,21 @@ export default class SmartLocations extends React.Component<{}, SmartLocationsSt
       <div>
         <TableCard data={this.state.data} headers={this.headers}
                    rowKey={'_id'} length={4} onPaginate={this.getData} />
+        <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
+        <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
+          <SmartLocationsEdit toggle={this.toggle.bind(this)} />
+        </Modal>
       </div>
     );
   }
 
   getData(event: TableCardState) {
     console.log(event);
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+    });
   }
 }
