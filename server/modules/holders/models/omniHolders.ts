@@ -37,8 +37,8 @@ class Holders {
     this.schema = new Schema({
       _id: { type: String, required: true },
       name: { type: String, required: true },
-      group: { type: String, required: true },
-      profiles: [{ type: Schema.Types.ObjectId, required: true }],
+      group: { type: Schema.Types.ObjectId, ref: 'OmniHoldersGroups', required: true },
+      profiles: [{ type: Schema.Types.ObjectId, ref: 'OmniHoldersProfiles', required: true }],
       activeCard: { type: String, ref: 'OmniSmartCards' },
       student: {
         _id: false,
