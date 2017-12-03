@@ -1,5 +1,9 @@
 import * as React from 'react';
 import TableCard, { TableCardState } from '../../core/Content/TableCard';
+import FabButton from '../../core/Elements/FabButton';
+import { ADD } from '../../../icons';
+import Modal from 'reactstrap/lib/Modal';
+import SmartMachinesAdd from './SmartMachinesAdd';
 
 interface SmartMachinesData {
   _id: string;
@@ -11,6 +15,7 @@ interface SmartMachinesData {
 
 interface SmartMachinesState {
   data: SmartMachinesData[];
+  modal: boolean;
 }
 
 const data: SmartMachinesData[] = [
@@ -40,11 +45,21 @@ export default class SmartMachines extends React.Component<{}, SmartMachinesStat
       <div>
         <TableCard data={this.state.data} headers={this.headers}
                    rowKey={'_id'} length={12} onPaginate={this.getData} />
+        <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
+        <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
+          <SmartMachinesAdd toggle={this.toggle.bind(this)} />
+        </Modal>
       </div>
     );
   }
 
   getData(event: TableCardState) {
     console.log(event);
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+    });
   }
 }
