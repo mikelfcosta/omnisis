@@ -18,8 +18,8 @@ class HoldersGroups {
       name: { type: String, required: true },
       createdAt: { type: Date, default: Date.now },
       createdBy: { type: String, required: true, ref: 'OmniUsers' },
-      lastUpdatedAt: { type: String, default: Date.now },
-      lastUpdatedBy: { type: Date, required: true, ref: 'OmniUsers' },
+      lastUpdatedAt: { type: Date, default: Date.now },
+      lastUpdatedBy: { type: String, required: true, ref: 'OmniUsers' },
     });
   }
 }
