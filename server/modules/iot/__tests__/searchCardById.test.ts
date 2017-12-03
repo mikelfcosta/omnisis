@@ -1,7 +1,7 @@
 import * as supertest from 'supertest';
 import App from '../../../App';
 import { OmniRouter } from '../../../Router';
-import { IOmniSmartCards, omniSmartCards } from '../models/Cards';
+import { IOmniSmartCards, omniSmartCards } from '../models/omniSmartCards';
 import { populateCards } from './helpers';
 import { PRIVATE_KEY } from '../index';
 

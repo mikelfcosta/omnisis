@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ECardErrors, omniSmartCards } from '../models/Cards';
+import { ECardErrors, omniSmartCards } from '../models/omniSmartCards';
 import { PRIVATE_KEY } from '../index';
 
 /**
