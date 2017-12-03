@@ -1,7 +1,12 @@
-import { Schema, Document, Model, model } from 'mongoose';
+import { Schema, Document, Model, model, Types } from 'mongoose';
 
 export interface IOmniHoldersGroups extends Document {
-  _id: Schema.Types.ObjectId;
+  _id: Types.ObjectId;
+  name: string;
+  createdAt: Date;
+  createdBy: string;
+  lastUpdatedAt: Date;
+  lastUpdatedBy: string;
 }
 
 export interface IOmniHoldersGroupsModel extends Model<IOmniHoldersGroups> {}
