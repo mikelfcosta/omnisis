@@ -31,9 +31,9 @@ class SmartCards {
       _id: { type: String, required: true },
       assigned: { type: Boolean, default: false },
       student: { type: String, ref: 'OmniHolders' },
-      active: { type: Boolean, default: false },
+      active: { type: Boolean, default: true },
       lastAssignedBy: { type: String, ref: 'OmniUsers' },
-      lastAssignedAt: Date,
+      lastAssignedAt: { type: Date, default: Date.now },
     });
   }
 
