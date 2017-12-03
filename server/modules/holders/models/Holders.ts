@@ -37,7 +37,8 @@ class Holders {
     this.schema = new Schema({
       _id: { type: String, required: true },
       name: { type: String, required: true },
-      type: { type: String, required: true },
+      group: { type: String, required: true },
+      profiles: [{ type: Schema.Types.ObjectId, required: true }],
       activeCard: { type: String, ref: 'OmniSmartCards' },
       student: {
         _id: false,
@@ -51,9 +52,6 @@ class Holders {
         _id: false,
         job: String,
         campus: [{ _id: false, type: Schema.Types.ObjectId }],
-        worksheet: [
-          { weekday: String, timeslots: [{ start: String, end: String }] },
-        ],
       },
     });
   }
