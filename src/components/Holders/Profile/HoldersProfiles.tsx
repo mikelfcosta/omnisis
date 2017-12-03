@@ -1,5 +1,9 @@
 import * as React from 'react';
 import TableCard, { TableCardState } from '../../core/Content/TableCard';
+import HoldersProfileAdd from './HoldersProfileAdd';
+import FabButton from '../../core/Elements/FabButton';
+import Modal from 'reactstrap/lib/Modal';
+import { ADD } from '../../../icons';
 
 interface HoldersProfilesData {
   _id?: string;
@@ -11,6 +15,7 @@ interface HoldersProfilesData {
 
 interface HoldersProfilesState {
   data: HoldersProfilesData[];
+  modal: boolean;
 }
 
 const data: HoldersProfilesData[] = [
@@ -35,11 +40,21 @@ export default class HoldersProfiles extends React.Component<{}, HoldersProfiles
       <div>
         <TableCard data={this.state.data} headers={this.headers}
                    rowKey={'name'} length={5} onPaginate={this.getData} />
+        <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
+        <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
+          <HoldersProfileAdd toggle={this.toggle.bind(this)} />
+        </Modal>
       </div>
     );
   }
 
   getData(event: TableCardState) {
     console.log(event);
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+    });
   }
 }
