@@ -1,7 +1,14 @@
-import { Schema, Document, Model, model } from 'mongoose';
+import { Schema, Document, Model, model, Types } from 'mongoose';
 
 export interface IOmniLocations extends Document {
-  _id: Schema.Types.ObjectId;
+  _id: Types.ObjectId;
+  campus: Types.ObjectId;
+  name: string;
+  machines: Types.ObjectId[];
+  createdAt: Date;
+  createdBy: string;
+  lastUpdatedAt: Date;
+  lastUpdatedBy: string;
 }
 
 export interface IOmniLocationsModel extends Model<IOmniLocations> {}
@@ -15,13 +22,13 @@ class OmniLocations {
 
   setSchema() {
     this.schema = new Schema({
-      campus: { type: String, required: true },
+      campus: { type: Schema.Types.ObjectId, ref: 'OmniCampi', required: true },
       name: { type: String, required: true },
       machines: [{ type: Schema.Types.ObjectId, ref: 'OmniMachines' }],
       createdAt: { type: Date, default: Date.now },
       createdBy: { type: String, required: true, ref: 'OmniUsers' },
-      lastUpdatedAt: { type: String, default: Date.now },
-      lastUpdatedBy: { type: Date, required: true, ref: 'OmniUsers' },
+      lastUpdatedAt: { type: Date, default: Date.now },
+      lastUpdatedBy: { type: String, required: true, ref: 'OmniUsers' },
     });
   }
 }
