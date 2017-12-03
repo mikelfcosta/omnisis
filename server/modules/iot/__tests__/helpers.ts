@@ -1,6 +1,6 @@
 import * as faker from 'faker';
 import { IOmniSmartCards, omniSmartCards } from '../models/omniSmartCards';
-import { omniHolders } from '../../holders/models/Holders';
+import { omniHolders } from '../../holders/models/omniHolders';
 
 const whiteCard = '80787d7a';
 const keyChain = '80cd5280';

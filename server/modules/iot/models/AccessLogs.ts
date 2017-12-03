@@ -1,5 +1,5 @@
 import { Schema, Document, model, Model, Types } from 'mongoose';
-import { IOmniHolders } from '../../holders/models/Holders';
+import { IOmniHolders } from '../../holders/models/omniHolders';
 
 export interface IOmniSmartCardsLogs extends Document {
   _id: Types.ObjectId;

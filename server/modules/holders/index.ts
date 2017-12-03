@@ -1,8 +1,6 @@
 import { Router } from 'express';
-import Holders from './models/Holders';
+import omniHolders from './models/omniHolders';
 
 const router = Router();
-
-const omniHolders = Holders;
 
 export default router;

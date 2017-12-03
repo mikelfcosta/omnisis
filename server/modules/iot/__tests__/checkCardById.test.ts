@@ -4,7 +4,7 @@ import { OmniRouter } from '../../../Router';
 import { ECardErrors, IOmniSmartCards, omniSmartCards } from '../models/omniSmartCards';
 import { populateCards } from './helpers';
 import { PRIVATE_KEY } from '../index';
-import omniHolders from '../../holders/models/Holders';
+import omniHolders from '../../holders/models/omniHolders';
 import normalizeName from '../common/normalizeName';
 
 const agent = supertest.agent(App);
