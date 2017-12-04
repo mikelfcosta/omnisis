@@ -21,13 +21,6 @@ export default async (req: Request, res: Response) => {
       query['name'] = { $regex, $options: 'i' };
     }
 
-    /*
-    name: string;
-    users: number;
-    createdBy: string;
-    updatedAt: string;
-   */
-
     const rawGroups = await omniHoldersGroups
       .find(query, 'name createdBy lastUpdatedAt')
       .sort(order)
@@ -36,17 +29,16 @@ export default async (req: Request, res: Response) => {
 
     const total = await omniHoldersGroups.count(query);
 
-    const groups: any[] = [];
-    return rawGroups.forEach(async (group, index) => {
+    return Promise.all(rawGroups.map(async (group) => {
       const usersOnGroup = await omniHolders.count({ group: group._id });
-      groups[index] = {
+      return {
         name: group.name,
         users: usersOnGroup,
         createdBy: group.createdBy,
         updatedAt: moment(group.lastUpdatedAt).format('DD/MM/YYYY'),
       };
-      if (index + 1 === rawGroups.length) return res.json({ groups, total });
-    });
+    }))
+      .then(groups => res.json({ groups, total }));
 
   } catch (err) {
     console.error(err);
