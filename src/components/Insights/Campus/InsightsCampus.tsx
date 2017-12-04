@@ -26,6 +26,7 @@ export default class InsightsCampus extends React.Component<{}, InsightsCampusSt
   componentWillMount() {
     this.getAccessByCampus();
     this.getAccessByMachines();
+    this.getActivesByCampus();
   }
 
   componentWillUnmount() {}
@@ -39,6 +40,12 @@ export default class InsightsCampus extends React.Component<{}, InsightsCampusSt
   getAccessByMachines() {
     axios.get(`${MODULES}/insights/campus/accessByMachine`)
       .then(response => this.setState({ accessByMachines: response.data }))
+      .catch(err => console.error(err));
+  }
+
+  getActivesByCampus() {
+    axios.get(`${MODULES}/insights/campus/activesByCampus`)
+      .then(response => this.setState({ activesByCampus: response.data }))
       .catch(err => console.error(err));
   }
 
@@ -80,7 +87,7 @@ export default class InsightsCampus extends React.Component<{}, InsightsCampusSt
           </div>
           <ResponsiveContainer height={300}>
             <PieChart>
-              <Pie data={this.state.accessByCampus} innerRadius={40} outerRadius={80} fill="#ED9262" dataKey="value" label/>
+              <Pie data={this.state.activesByCampus} innerRadius={40} outerRadius={80} fill="#ED9262" dataKey="Ativos" label/>
               <Tooltip/>
             </PieChart>
           </ResponsiveContainer>
