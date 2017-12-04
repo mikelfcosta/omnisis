@@ -30,7 +30,7 @@
   },
   "scripts": {
     "start": "npm run build && cross-env NODE_ENV=production TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"es2017\\\"} ts-node -F ./server/index.ts",
-    "dev:server": "cross-env NODE_ENV=development TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"es2017\\\"} ts-node -F ./server/index.ts",
+    "dev:server": "cross-env NODE_ENV=development TS_NODE_COMPILER_OPTIONS={\\\"target\\\":\\\"es2017\\\"} nodemon",
     "dev:client": "webpack-dev-server",
     "build": "webpack",
     "test": "jest --runInBand --forceExit",
