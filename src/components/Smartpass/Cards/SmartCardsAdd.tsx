@@ -1,11 +1,13 @@
 import * as React from 'react';
-import ModalHeader from 'reactstrap/lib/ModalHeader';
-import ModalBody from 'reactstrap/lib/ModalBody';
-import ModalFooter from 'reactstrap/lib/ModalFooter';
-import Button from 'reactstrap/lib/Button';
-import FormGroup from 'reactstrap/lib/FormGroup';
-import Label from 'reactstrap/lib/Label';
-import Input from 'reactstrap/lib/Input';
+import {
+  FormGroup,
+  Button,
+  ModalFooter,
+  ModalBody,
+  ModalHeader,
+  Label,
+  Input,
+} from 'reactstrap';
 
 interface SmartCardsAddProps {
   toggle: () => any;

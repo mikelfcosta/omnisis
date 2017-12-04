@@ -30,7 +30,7 @@ const config: webpack.Configuration = {
     new HtmlWebpackPlugin({
       title: 'IOT Project',
       chunksSortMode: 'dependency',
-      template: path.resolve(__dirname, './src/index.ejs'),
+      template: path.join(__dirname, './src/index.ejs'),
     }),
   ],
   module: {

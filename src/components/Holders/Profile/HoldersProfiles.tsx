@@ -2,7 +2,7 @@ import * as React from 'react';
 import TableCard, { TableCardState } from '../../core/Content/TableCard';
 import HoldersProfileAdd from './HoldersProfileAdd';
 import FabButton from '../../core/Elements/FabButton';
-import Modal from 'reactstrap/lib/Modal';
+import { Modal } from 'reactstrap';
 import { ADD } from '../../../icons';
 
 interface HoldersProfilesData {

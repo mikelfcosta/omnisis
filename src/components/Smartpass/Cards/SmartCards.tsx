@@ -3,7 +3,7 @@ import TableCard, { TableCardState } from '../../core/Content/TableCard';
 import SmartCardsAdd from './SmartCardsAdd';
 import FabButton from '../../core/Elements/FabButton';
 import { ADD } from '../../../icons';
-import Modal from 'reactstrap/lib/Modal';
+import { Modal } from 'reactstrap';
 
 interface SmartCardsData {
   _id: string;

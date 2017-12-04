@@ -1,12 +1,13 @@
 import * as React from 'react';
-import ModalHeader from 'reactstrap/lib/ModalHeader';
-import ModalBody from 'reactstrap/lib/ModalBody';
-import ModalFooter from 'reactstrap/lib/ModalFooter';
-import Button from 'reactstrap/lib/Button';
-import FormGroup from 'reactstrap/lib/FormGroup';
-import Label from 'reactstrap/lib/Label';
-import Input from 'reactstrap/lib/Input';
-import { ChangeEvent } from 'react';
+import {
+  FormGroup,
+  Button,
+  ModalFooter,
+  ModalBody,
+  ModalHeader,
+  Label,
+  Input,
+} from 'reactstrap';
 
 interface HoldersDetailProps {
   toggle: () => any;
@@ -145,7 +146,7 @@ export default class HoldersDetail extends React.Component<HoldersDetailProps, H
     });
   }
 
-  handleProfileChange(e: ChangeEvent<any>) {
+  handleProfileChange(e: any) {
     const options = e.target.options;
     const values = [];
     for (let i = 0, l = options.length; i < l; i += 1) {

@@ -1,12 +1,13 @@
 import * as React from 'react';
-import ModalHeader from 'reactstrap/lib/ModalHeader';
-import ModalBody from 'reactstrap/lib/ModalBody';
-import ModalFooter from 'reactstrap/lib/ModalFooter';
-import Button from 'reactstrap/lib/Button';
-import FormGroup from 'reactstrap/lib/FormGroup';
-import Label from 'reactstrap/lib/Label';
-import Input from 'reactstrap/lib/Input';
-import { ChangeEvent } from 'react';
+import {
+  FormGroup,
+  Button,
+  ModalFooter,
+  ModalBody,
+  ModalHeader,
+  Label,
+  Input,
+} from 'reactstrap';
 
 interface HoldersProfileAddProps {
   toggle: () => any;
@@ -58,7 +59,7 @@ export default class HoldersProfileAdd extends React.Component<HoldersProfileAdd
     );
   }
 
-  handleSelectChange(e: ChangeEvent<any>) {
+  handleSelectChange(e: any) {
     const options = e.target.options;
     const values = [];
     for (let i = 0, l = options.length; i < l; i += 1) {
@@ -93,7 +94,7 @@ export default class HoldersProfileAdd extends React.Component<HoldersProfileAdd
       return (
         <optgroup label={campus.campus} key={campus.campus}>
           {campus.locations.map((location) => {
-            return <option key={location._id} value={location._id}>{ location.name }</option>
+            return (<option key={location._id} value={location._id}>{ location.name }</option>);
           })}
         </optgroup>
       );
