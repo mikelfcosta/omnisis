@@ -4,6 +4,8 @@ import FabButton from '../../core/Elements/FabButton';
 import { ADD } from '../../../icons';
 import { Modal } from 'reactstrap';
 import SmartLocationsEdit from './SmartLocationsEdit';
+import axios from 'axios';
+import { MODULES } from '../../../constants';
 
 interface SmartLocationsData {
   _id: string;
@@ -15,29 +17,30 @@ interface SmartLocationsData {
 
 interface SmartLocationsState {
   data: SmartLocationsData[];
+  length: number;
   modal: boolean;
 }
 
-const data: SmartLocationsData[] = [
-  { _id: '000004', location: 'Morumbi - Entrada Frontal', machines: '4', createdBy: 'michel.costa', updatedAt: '16/11/2017' },
-  { _id: '000003', location: 'Vila Olímpia - Academia', machines: '2', createdBy: 'michel.costa', updatedAt: '16/11/2017' },
-  { _id: '000002', location: 'Vila Olímpia - Prédio A', machines: '3', createdBy: 'michel.costa', updatedAt: '15/11/2017' },
-  { _id: '000001', location: 'Paulista I - Entrada Principal', machines: '4', createdBy: 'michel.costa', updatedAt: '15/11/2017' },
-];
-
 export default class SmartLocations extends React.Component<{}, SmartLocationsState> {
-  private headers = ['ID', 'Local', 'Maquinas', 'Criado por', 'Ultima Atualização'];
+  private headers = ['ID', 'Campus', 'Local', 'Maquinas', 'Criado por', 'Ultima Atualização'];
 
-  constructor(props: any) {
+  constructor(props: {}) {
     super(props);
-
     this.state = {
-      data,
+      data: [],
+      length: 0,
       modal: false,
     };
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    this.getData({
+      page: 0,
+      limit: 10,
+      order: '-lastUpdatedAt',
+      search: '',
+    });
+  }
 
   componentWillUnmount() {}
 
@@ -45,7 +48,7 @@ export default class SmartLocations extends React.Component<{}, SmartLocationsSt
     return (
       <div>
         <TableCard data={this.state.data} headers={this.headers}
-                   rowKey={'_id'} length={4} onPaginate={this.getData} />
+                   rowKey={'_id'} length={this.state.length} onPaginate={this.getData.bind(this)} />
         <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
         <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
           <SmartLocationsEdit toggle={this.toggle.bind(this)} />
@@ -55,7 +58,18 @@ export default class SmartLocations extends React.Component<{}, SmartLocationsSt
   }
 
   getData(event: TableCardState) {
-    console.log(event);
+    axios.get(`${MODULES}/locations/locations`, {
+      params: {
+        page: event.page,
+        limit: event.limit,
+        order: event.order,
+        search: event.search,
+      },
+    })
+      .then((response) => {
+        this.setState({ data: response.data.locations, length: response.data.total });
+      })
+      .catch(err => console.error(err));
   }
 
   toggle() {
