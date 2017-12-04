@@ -47,7 +47,7 @@ export default class HoldersGroups extends React.Component<{}, HoldersGroupsStat
   render() {
     return (
       <div>
-        <TableCard data={this.state.data} headers={this.headers} order={'name'}
+        <TableCard data={this.state.data} headers={this.headers} order={'name'} edit={true} onEdit={this.onEdit.bind(this)}
                    rowKey={'name'} length={this.state.length} onPaginate={this.getData} />
         <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
         <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
@@ -76,5 +76,9 @@ export default class HoldersGroups extends React.Component<{}, HoldersGroupsStat
     this.setState({
       modal: !this.state.modal,
     });
+  }
+
+  onEdit(row: HoldersGroupsData) {
+    console.log(row);
   }
 }

@@ -19,6 +19,8 @@ interface SmartCardsState {
   data: SmartCardsData[];
   length: number;
   modal: boolean;
+  modalType?: string;
+  modalData: any;
 }
 
 export default class SmartCards extends React.Component<{}, SmartCardsState> {
@@ -30,6 +32,7 @@ export default class SmartCards extends React.Component<{}, SmartCardsState> {
       data: [],
       length: 0,
       modal: false,
+      modalData: {},
     };
   }
 
@@ -47,8 +50,9 @@ export default class SmartCards extends React.Component<{}, SmartCardsState> {
   render() {
     return (
       <div>
-        <TableCard data={this.state.data} headers={this.headers}
-                   rowKey={'_id'} length={this.state.length} onPaginate={this.getData.bind(this)} />
+        <TableCard data={this.state.data} headers={this.headers} edit={true} assign={true}
+                   rowKey={'_id'} length={this.state.length} onPaginate={this.getData.bind(this)}
+                   onEdit={this.editData.bind(this)} onAssign={this.assignUser.bind(this)}/>
         <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
         <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
           <SmartCardsAdd toggle={this.toggle.bind(this)} />
@@ -75,6 +79,22 @@ export default class SmartCards extends React.Component<{}, SmartCardsState> {
   toggle() {
     this.setState({
       modal: !this.state.modal,
+    });
+  }
+
+  editData(row: SmartCardsData) {
+    this.setState({
+      modal: !this.state.modal,
+      modalType: 'edit',
+      modalData: row,
+    });
+  }
+
+  assignUser(row: SmartCardsData) {
+    this.setState({
+      modal: !this.state.modal,
+      modalType: 'assign',
+      modalData: row,
     });
   }
 }

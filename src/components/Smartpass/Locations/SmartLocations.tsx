@@ -47,7 +47,7 @@ export default class SmartLocations extends React.Component<{}, SmartLocationsSt
   render() {
     return (
       <div>
-        <TableCard data={this.state.data} headers={this.headers}
+        <TableCard data={this.state.data} headers={this.headers} edit={true} onEdit={this.onEdit.bind(this)}
                    rowKey={'_id'} length={this.state.length} onPaginate={this.getData.bind(this)} />
         <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
         <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
@@ -76,5 +76,10 @@ export default class SmartLocations extends React.Component<{}, SmartLocationsSt
     this.setState({
       modal: !this.state.modal,
     });
+  }
+
+
+  onEdit(row: SmartLocationsData) {
+    console.log(row);
   }
 }

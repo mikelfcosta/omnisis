@@ -47,7 +47,7 @@ export default class SmartMachines extends React.Component<{}, SmartMachinesStat
   render() {
     return (
       <div>
-        <TableCard data={this.state.data} headers={this.headers} order={'-_id'}
+        <TableCard data={this.state.data} headers={this.headers} order={'-_id'} edit={true} onEdit={this.onEdit.bind(this)}
                    rowKey={'_id'} length={this.state.length} onPaginate={this.getData.bind(this)} />
         <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
         <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
@@ -76,5 +76,9 @@ export default class SmartMachines extends React.Component<{}, SmartMachinesStat
     this.setState({
       modal: !this.state.modal,
     });
+  }
+
+  onEdit(row: SmartMachinesData) {
+    console.log(row);
   }
 }
