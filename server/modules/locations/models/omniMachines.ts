@@ -2,9 +2,8 @@ import { Schema, Document, Model, model, Types } from 'mongoose';
 
 export interface IOmniMachines extends Document {
   _id: Types.ObjectId;
-  campus: Types.ObjectId;
-  name: string;
-  machines: Types.ObjectId[];
+  status: boolean;
+  location: Types.ObjectId;
   createdAt: Date;
   createdBy: string;
   lastUpdatedAt: Date;
