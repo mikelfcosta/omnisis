@@ -21,7 +21,7 @@ interface HoldersManageState {
   length: number;
   modal: boolean;
   modalType?: string;
-  modalData?: HoldersManageData;
+  modalData: any;
 }
 
 export default class HoldersManage extends React.Component<{}, HoldersManageState> {
@@ -34,6 +34,7 @@ export default class HoldersManage extends React.Component<{}, HoldersManageStat
       data: [],
       length: 0,
       modal: false,
+      modalData: {},
     };
   }
 
