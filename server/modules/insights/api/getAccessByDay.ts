@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as moment from 'moment';
 import omniSmartCardsLogs from '../../iot/models/omniSmartCardsLogs';
-import * as fs from 'fs'
+import * as fs from 'fs';
 
 /**
  * Given a Card ID, check if the card exists, is assigned and validated.
