@@ -84,12 +84,15 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
   }
 
   renderRows() {
+    if (this.props.data.length === 0) return;
     return this.props.data.map((row) => {
-      return (
-        <tr key={row[this.props.rowKey]}>
-          {this.renderCells(row)}
-        </tr>
-      );
+      if (row != null) {
+        return (
+          <tr key={row[this.props.rowKey]}>
+            {this.renderCells(row)}
+          </tr>
+        );
+      }
     });
   }
 
