@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { nav, navItem, childrenActive, navItemChildren, active } from './Nav.scss';
-import { HOME, INSIGHTS, USERS } from '../../../icons';
+import { HOME, INSIGHTS, USERS, CARDS, ADMIN } from '../../../icons';
 import { NavLink } from 'react-router-dom';
 
 interface INavState {
@@ -31,7 +31,7 @@ const navigation: INavigation[] = [
   },
   {
     name: 'Smart Pass',
-    icon: USERS,
+    icon: CARDS,
     children: [
       { name: 'Maquinas', link: '/iot/machines' },
       { name: 'Cartões', link: '/iot/cards' },
@@ -49,7 +49,7 @@ const navigation: INavigation[] = [
   },
   {
     name: 'Admin',
-    icon: INSIGHTS,
+    icon: ADMIN,
     children: [
       { name: 'Usuários', link: '/admin/users' },
       { name: 'Perfis', link: '/admin/roles' },

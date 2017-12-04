@@ -1,30 +1,44 @@
-<svg width="22" height="20" viewBox="0 0 22 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 44 44" style="enable-background:new 0 0 44 44;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+</style>
 <title>Icon: Graph_bar</title>
 <desc>Created using Figma</desc>
 <g id="Canvas" transform="translate(8906 4665)">
-<g id="Icon: Graph_bar">
-<g id="Vector">
-<use xlink:href="#path0_fill" transform="translate(-8888 -4665)" fill="#FFFFFF"/>
+	<g id="Icon:_Graph_x5F_bar">
+		<g id="Vector">
+			<g transform="translate(-8888 -4665)">
+				<path id="path0_fill" class="st0" d="M-8876.5-4635.2h2.8c0.3,0,0.5-0.3,0.5-0.5v-16.8c0-0.3-0.3-0.5-0.5-0.5h-2.8
+					c-0.3,0-0.5,0.2-0.5,0.5v16.8C-8877-4635.4-8876.8-4635.2-8876.5-4635.2z"/>
+			</g>
+		</g>
+		<g id="Vector_1_">
+			<g transform="translate(-8894 -4660.41)">
+				<path id="path1_fill" class="st0" d="M-8882.5-4635.2h2.9c0.3,0,0.5-0.2,0.5-0.5v-12.3c0-0.3-0.2-0.5-0.5-0.5h-2.9
+					c-0.3,0-0.5,0.2-0.5,0.5v12.3C-8883-4635.4-8882.8-4635.2-8882.5-4635.2z"/>
+			</g>
+		</g>
+		<g id="Vector_2_">
+			<g transform="translate(-8900 -4662.52)">
+				<path id="path2_fill" class="st0" d="M-8888.5-4635.2h2.9c0.3,0,0.5-0.2,0.5-0.5v-14.4c0-0.3-0.2-0.5-0.5-0.5h-2.9
+					c-0.3-0.1-0.5,0.2-0.5,0.5v14.4C-8889-4635.4-8888.8-4635.2-8888.5-4635.2z"/>
+			</g>
+		</g>
+		<g id="Vector_3_">
+			<g transform="translate(-8906 -4646)">
+				<path id="path3_fill" class="st0" d="M-8873.6-4633h-20.7c-0.3,0-0.6-0.2-0.6-0.5c0-0.3,0.3-0.5,0.6-0.5h20.7
+					c0.3,0,0.6,0.2,0.6,0.5C-8873-4633.3-8873.3-4633-8873.6-4633z"/>
+			</g>
+		</g>
+		<g id="Vector_4_">
+			<g transform="translate(-8906 -4658.73)">
+				<path id="path4_fill" class="st0" d="M-8894.6-4635.2h3c0.2,0,0.4-0.2,0.4-0.4v-10.7c0-0.2-0.2-0.4-0.4-0.4h-3
+					c-0.2,0-0.4,0.2-0.4,0.4v10.7C-8895-4635.4-8894.8-4635.2-8894.6-4635.2z"/>
+			</g>
+		</g>
+	</g>
 </g>
-<g id="Vector">
-<use xlink:href="#path1_fill" transform="translate(-8894 -4660.41)" fill="#FFFFFF"/>
-</g>
-<g id="Vector">
-<use xlink:href="#path2_fill" transform="translate(-8900 -4662.52)" fill="#FFFFFF"/>
-</g>
-<g id="Vector">
-<use xlink:href="#path3_fill" transform="translate(-8906 -4646)" fill="#FFFFFF"/>
-</g>
-<g id="Vector">
-<use xlink:href="#path4_fill" transform="translate(-8906 -4658.73)" fill="#FFFFFF"/>
-</g>
-</g>
-</g>
-<defs>
-<path id="path0_fill" d="M 0.515995 17.8378L 3.30237 17.8378C 3.56037 17.8378 3.81837 17.5676 3.81837 17.2973L 3.81837 0.54054C 3.81837 0.216216 3.56037 0 3.30237 0L 0.515995 0C 0.257998 0 -3.93674e-07 0.216216 -3.93674e-07 0.54054L -3.93674e-07 17.2973C -3.93674e-07 17.5676 0.206398 17.8378 0.515995 17.8378Z"/>
-<path id="path1_fill" d="M 0.464397 13.2432L 3.40557 13.2432C 3.66357 13.2432 3.86997 13.027 3.86997 12.7568L 3.86997 0.486486C 3.86997 0.216216 3.66357 0 3.40557 0L 0.464397 0C 0.206399 0 -3.93674e-07 0.216216 -3.93674e-07 0.486486L -3.93674e-07 12.7568C -3.93674e-07 13.027 0.206399 13.2432 0.464397 13.2432Z"/>
-<path id="path2_fill" d="M 0.464396 15.3583L 3.35397 15.3583C 3.61197 15.3583 3.81837 15.1421 3.81837 14.8718L 3.81837 0.493444C 3.81837 0.223173 3.61197 0.00695721 3.35397 0.00695721L 0.464396 0.00695721C 0.206398 -0.0470968 -1.96837e-07 0.223173 -1.96837e-07 0.493444L -1.96837e-07 14.8718C -1.96837e-07 15.1421 0.206398 15.3583 0.464396 15.3583Z"/>
-<path id="path3_fill" d="M 21.3567 1L 0.643275 1C 0.321637 1 0 0.8 0 0.5C 0 0.25 0.25731 0 0.643275 0L 21.3567 0C 21.6784 0 22 0.2 22 0.5C 22 0.75 21.6784 1 21.3567 1Z"/>
-<path id="path4_fill" d="M 0.412797 11.5676L 3.40557 11.5676C 3.61197 11.5676 3.81837 11.3513 3.81837 11.1351L 3.81837 0.432432C 3.81837 0.216216 3.61197 2.062e-07 3.40557 2.062e-07L 0.412797 2.062e-07C 0.206398 2.062e-07 0 0.216216 0 0.432432L 0 11.1351C 0 11.3513 0.206398 11.5676 0.412797 11.5676Z"/>
-</defs>
 </svg>
