@@ -94,7 +94,6 @@ export default class HoldersManage extends React.Component<{}, HoldersManageStat
   toggle() {
     this.setState({
       modal: !this.state.modal,
-      modalType: 'add',
     });
   }
 
