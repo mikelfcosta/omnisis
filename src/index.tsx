@@ -5,12 +5,17 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './components/core/App/App';
 import 'bootstrap/dist/css/bootstrap.css';
 import './sass/base.scss';
+import { Route, Switch } from 'react-router';
+import Login from './components/Login/Login';
 
 const rootEl = document.getElementById('root');
 ReactDOM.render(
   <BrowserRouter>
     <AppContainer>
-      <App />
+      <Switch>
+        <Route path="/login" component={Login}/>
+        <Route path="/"><App /></Route>
+      </Switch>
     </AppContainer>
   </BrowserRouter>,
   rootEl,
