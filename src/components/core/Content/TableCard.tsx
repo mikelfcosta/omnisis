@@ -10,6 +10,7 @@ interface TableCardProps {
   headers: string[];
   data: any[];
   length: number;
+  order?: string;
   onPaginate: (event: TableCardState) => any;
 }
 
@@ -24,7 +25,7 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
 
   constructor(props: TableCardProps) {
     super(props);
-    this.state = { search: '', page: 0, limit: 10 };
+    this.state = { search: '', page: 0, limit: 10, order: props.order };
   }
 
   componentWillUnmount() {}
