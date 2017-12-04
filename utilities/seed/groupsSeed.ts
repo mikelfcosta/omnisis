@@ -2,6 +2,7 @@ import { random } from 'lodash';
 import { models } from '../seed';
 
 export async function groupsSeed() {
+  console.info('Starting Groups Seed');
   await models.omniHoldersGroups.remove({});
 
   const groups = ['Alunos Graduação', 'Alunos Pós-Graduação', 'Alunos BSP', 'Professores', 'Funcionários', 'Visitantes', 'Ex-Alunos'];

@@ -5,7 +5,8 @@ import * as faker from 'faker';
 const whiteCardId = '80787d7a';
 const keyChainId = '80cd5280';
 
-export default async function cardsSeed(quantity = 10000) {
+export default async function cardsSeed(quantity = 40000) {
+  console.info('Starting Cards Seed');
   await models.omniSmartCards.remove({});
 
 

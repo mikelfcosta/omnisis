@@ -10,6 +10,7 @@ const whiteCard = '80787d7a';
 const keyChain = '80cd5280';
 
 export async function holdersSeed(quantity = 50000) {
+  console.info('Starting Holders Seed');
   try {
     const groups = await models.omniHoldersGroups.find({});
     const profiles = await models.omniHoldersProfiles.find({});
@@ -49,8 +50,8 @@ export async function holdersSeed(quantity = 50000) {
         }
       }
 
-
-
+      const users = ['michel.costa', 'joao.vitor'];
+      const user = users[random(0, 1)];
 
       let newHolder: any;
       if (typeOfHolder < 15) {
@@ -63,6 +64,8 @@ export async function holdersSeed(quantity = 50000) {
           student: {
             mainCampus: campus[random(0, campus.length - 1)]._id,
           },
+          createdBy: user,
+          lastUpdatedBy: user,
         });
       } else {
         let staffGroup: Types.ObjectId;
@@ -78,6 +81,8 @@ export async function holdersSeed(quantity = 50000) {
           staff: {
             campus: [campus[random(0, campus.length - 1)]._id],
           },
+          createdBy: user,
+          lastUpdatedBy: user,
         });
       }
 
@@ -104,6 +109,8 @@ async function setMainHolders(groups: IOmniHoldersGroups[], campus: IOmniCampi[]
     student: {
       mainCampus: campusToUse[0]._id,
     },
+    createdBy: 'michel.costa',
+    lastUpdatedBy: 'michel.costa',
   });
   await whiteCardHolder.save();
   await models.omniSmartCards.findByIdAndUpdate(whiteCard, {
@@ -124,6 +131,8 @@ async function setMainHolders(groups: IOmniHoldersGroups[], campus: IOmniCampi[]
     student: {
       mainCampus: campusToUse[0]._id,
     },
+    createdBy: 'michel.costa',
+    lastUpdatedBy: 'michel.costa',
   });
   await keychainHolder.save();
   await models.omniSmartCards.findByIdAndUpdate(keyChain, {

@@ -2,6 +2,7 @@ import { random } from 'lodash';
 import { models } from '../seed';
 
 export default async function machinesSeed(quantity = 47) {
+  console.info('Starting Machines Seed');
   const users = ['michel.costa', 'joao.vitor'];
   const machinesToSave = [];
 

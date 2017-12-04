@@ -2,6 +2,7 @@ import { random } from 'lodash';
 import { models } from '../seed';
 
 export async function campusSeed() {
+  console.info('Starting Campus Seed');
   await models.omniCampi.remove({});
   const campi = ['Morumbi', 'Vila Olímpia', 'Paulista I', 'Paulista II', 'Mooca'];
   const users = ['michel.costa', 'joao.vitor'];

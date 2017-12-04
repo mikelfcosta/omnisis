@@ -2,6 +2,7 @@ import { random } from 'lodash';
 import { models } from '../seed';
 
 export async function locationsSeed() {
+  console.info('Starting Locations Seed');
   await models.omniLocations.remove({});
   const campi = await models.omniCampi.find({});
   const users = ['michel.costa', 'joao.vitor'];

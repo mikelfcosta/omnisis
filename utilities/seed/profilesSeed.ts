@@ -2,6 +2,7 @@ import { random } from 'lodash';
 import { models } from '../seed';
 
 export default async function profilesSeed() {
+  console.info('Starting Profiles Seed');
   await models.omniHoldersProfiles.remove({});
   const profiles = ['Acesso Básico', 'Estudio', 'Academia', 'BSP', 'Acesso Completo'];
   const users = ['michel.costa', 'joao.vitor'];
