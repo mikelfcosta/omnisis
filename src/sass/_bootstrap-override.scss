@@ -43,6 +43,14 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0877491);
       border-radius: 3px;
     }
+
+    &:disabled {
+      background: #FFFFFF;
+      border: 1px solid #DDDDDD;
+      box-sizing: border-box;
+      border-radius: 3px;
+      color: #7C8495;
+    }
   }
 
   .btn {
