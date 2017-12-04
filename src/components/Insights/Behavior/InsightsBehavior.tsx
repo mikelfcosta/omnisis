@@ -4,10 +4,13 @@ import { cardHeader } from '../../core/Content/Card.scss';
 import { chart } from './InsightsBehavior.scss';
 import { MODULES } from '../../../constants';
 import axios from 'axios';
-import { LineChart, ResponsiveContainer, XAxis, CartesianGrid, Tooltip, Legend, Line } from 'recharts';
+import { LineChart, ResponsiveContainer, XAxis, CartesianGrid, Tooltip, Legend, Line, PieChart, Pie } from 'recharts';
 
 interface InsightsBehaviorState {
   accessByDay: any[];
+  activeInactiveCount: any[];
+  averageAccessTime: any[];
+  averageInactiveTime: any[];
 }
 
 export default class InsightsBehavior extends React.Component<{}, InsightsBehaviorState> {
@@ -16,11 +19,17 @@ export default class InsightsBehavior extends React.Component<{}, InsightsBehavi
     super(props);
     this.state = {
       accessByDay: [],
+      activeInactiveCount: [],
+      averageAccessTime: [],
+      averageInactiveTime: [],
     };
   }
 
   componentWillMount() {
     this.getAccessByDay();
+    this.getActiveInactiveCount();
+    this.getAverageAccessTime();
+    this.getAverageInactiveTime();
   }
 
   componentWillUnmount() {}
@@ -28,6 +37,24 @@ export default class InsightsBehavior extends React.Component<{}, InsightsBehavi
   getAccessByDay() {
     axios.get(`${MODULES}/insights/behavior/accessByDay`)
       .then(response => this.setState({ accessByDay: response.data }))
+      .catch(err => console.error(err));
+  }
+
+  getActiveInactiveCount() {
+    axios.get(`${MODULES}/insights/behavior/activeInactiveCount`)
+      .then(response => this.setState({ activeInactiveCount: response.data }))
+      .catch(err => console.error(err));
+  }
+
+  getAverageAccessTime() {
+    axios.get(`${MODULES}/insights/behavior/averageAccessTime`)
+      .then(response => this.setState({ averageAccessTime: response.data }))
+      .catch(err => console.error(err));
+  }
+
+  getAverageInactiveTime() {
+    axios.get(`${MODULES}/insights/behavior/averageInactiveTime`)
+      .then(response => this.setState({ averageInactiveTime: response.data }))
       .catch(err => console.error(err));
   }
 
@@ -53,34 +80,39 @@ export default class InsightsBehavior extends React.Component<{}, InsightsBehavi
           <div className={cardHeader}>
             Média de Tempo de Acesso
           </div>
-          <div className={chart}>
-            <p>ChartType: Pizza</p>
-            <p>ChartData: AverageAccessTime</p>
-            <p>ChartOptions: Select StartDate/EndDate</p>
-            <p>ChartLegend: [0-30m, 31m-60m, 1h-2h, 2h-3h, 3h+]</p>
-          </div>
+          <ResponsiveContainer height={300}>
+            <PieChart>
+              <Pie data={this.state.averageAccessTime} innerRadius={40} outerRadius={80} fill="#ED9262" dataKey="value" label/>
+              <Tooltip/>
+            </PieChart>
+          </ResponsiveContainer>
         </Card>
         <Card size={40}>
           <div className={cardHeader}>
             Média de Inatividade
           </div>
-          <div className={chart}>
-            <p>ChartType: Pizza</p>
-            <p>ChartData: AverageAccessTime</p>
-            <p>ChartOptions: Select StartDate/EndDate</p>
-            <p>ChartLegend: [7d-15d, 16d-30d, 1m-2m, 3m+]</p>
-          </div>
+          <ResponsiveContainer height={300}>
+            <PieChart>
+              <Pie data={this.state.averageInactiveTime} innerRadius={40} outerRadius={80} fill="#ED9262" dataKey="value" label/>
+              <Tooltip/>
+            </PieChart>
+          </ResponsiveContainer>
         </Card>
         <Card size={100}>
           <div className={cardHeader}>
             Ativos e Inativos
           </div>
-          <div className={chart}>
-            <p>ChartType: Lines</p>
-            <p>ChartData: Inactives</p>
-            <p>ChartOptions: Select StartDate/EndDate</p>
-            <p>ChartLegend: [ActiveCount, InactiveCount]</p>
-          </div>
+          <ResponsiveContainer height={400}>
+            <LineChart height={400} data={this.state.activeInactiveCount}
+                       margin={{ top: 40, right: 20, left: 20, bottom: 10 }}>
+              <XAxis dataKey="name"/>
+              <CartesianGrid strokeDasharray="2 3" vertical={false}/>
+              <Tooltip/>
+              <Legend />
+              <Line type="monotone" dataKey="active" stroke="#004751" />
+              <Line type="monotone" dataKey="inactive" stroke="#004751" />
+            </LineChart>
+          </ResponsiveContainer>
         </Card>
       </div>
     );
