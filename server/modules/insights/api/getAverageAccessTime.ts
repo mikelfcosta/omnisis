@@ -19,13 +19,13 @@ export default async (req: Request, res: Response) => {
       for (let i = 0; i <= 60; i += 1) {
         const day = moment().subtract(i, 'd');
         // const query = { timestamp: { $gte: day.startOf('d').toDate(), $lte: day.endOf('d').toDate() } };
-        newData = {
-          '0-30m': 1251,
-          '31m-60m': 3255,
-          '1h-2h': 4820,
-          '2h-3h': 3462,
-          '3h+': 302,
-        };
+        newData = [
+          { name: '0-30m', value: 1251 },
+          { name: '31m-60m', value: 3255 },
+          { name: '1h-2h', value: 4820 },
+          { name: '2h-3h', value: 3462 },
+          { name: '3h+', value: 302 },
+        ];
       }
 
       return fs.writeFile(`${__dirname}/data/getAverageAccessTime.${day}.json`, JSON.stringify(newData), 'utf8', (err) => {

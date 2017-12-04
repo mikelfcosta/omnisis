@@ -19,12 +19,12 @@ export default async (req: Request, res: Response) => {
       for (let i = 0; i <= 60; i += 1) {
         const day = moment().subtract(i, 'd');
         // const query = { timestamp: { $gte: day.startOf('d').toDate(), $lte: day.endOf('d').toDate() } };
-        newData = {
-          '7-15d': 0,
-          '16d-30d': 1060,
-          '1m-2m': 30512,
-          '3m+': 8450,
-        };
+        newData = [
+          { name: '7-15d', value: 0 },
+          { name: '16d-30d', value: 1060 },
+          { name: '1m-2m', value: 30512 },
+          { name: '3m+', value: 8450 },
+        ];
       }
       return fs.writeFile(`${__dirname}/data/getAverageInactiveTime.${day}.json`, JSON.stringify(newData), 'utf8', (err) => {
         if (err) console.error(err);

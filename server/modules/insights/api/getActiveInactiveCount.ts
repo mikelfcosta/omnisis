@@ -19,10 +19,11 @@ export default async (req: Request, res: Response) => {
       const newData: any[] = [];
       for (let i = 0; i <= 60; i += 1) {
         const day = moment().subtract(i, 'd');
-        const active = await omniHolders.count({ lastUpdatedAt: { $lte: moment(day).subtract(14, 'd').toDate() } });
-        const inactive = await omniHolders.count({ lastUpdatedAt: { $lte: day.toDate() } }) - active;
+        const inactive = await omniHolders.count({ lastUpdatedAt: { $lte: moment(day).subtract(14, 'd').toDate() } });
+        const active = await omniHolders.count({ activeCard: { $ne: null } }) - inactive;
         newData.push({ inactive, active, name: day.format('DD/MM') });
       }
+      newData.reverse();
       return fs.writeFile(`${__dirname}/data/getActiveInactiveCount.${day}.json`, JSON.stringify(newData), 'utf8', (err) => {
         if (err) console.error(err);
         res.json(newData);
