@@ -5,26 +5,7 @@
 <style type="text/css">
 	.st0{fill:#FFFFFF;}
 </style>
-<title>Icon : user Copy</title>
-<desc>Created using Figma</desc>
-<g id="Canvas" transform="translate(8512 4953)">
-	<g id="Icon_:_user_Copy">
-		<g id="Stroke_13">
-			<g transform="translate(-8512 -4942.57)">
-				<path id="path0_fill" class="st0" d="M-8481.2-4924.5c0-3.4-4.1-6.1-9.1-6.1c-5,0-9.1,2.7-9.1,6.1"/>
-			</g>
-		</g>
-		<g id="Stroke_15">
-			<g transform="translate(-8507.65 -4953)">
-				<path id="path1_fill" class="st0" d="M-8489.9-4930.6c2.9,0,5.2-2.3,5.2-5.2s-2.3-5.2-5.2-5.2c-2.9,0-5.2,2.3-5.2,5.2
-					S-8492.8-4930.6-8489.9-4930.6z"/>
-			</g>
-		</g>
-		<g id="Stroke_17">
-			<g transform="translate(-8512 -4936.48)">
-				<path id="path2_fill" class="st0" d="M-8481.2-4924.5v2.9c0,0.3-0.1,0.6-0.4,0.6h-17.3c-0.3,0-0.6-0.4-0.6-0.6v-2.9"/>
-			</g>
-		</g>
-	</g>
-</g>
+<path id="path2_fill" class="st0" d="M30.8,28.5v2.9c0,0.3-0.1,0.6-0.4,0.6H13.1c-0.3,0-0.6-0.4-0.6-0.6v-2.9"/>
+<path id="path0_fill" class="st0" d="M30.8,28.5c0-3.4-4.1-6.1-9.1-6.1c-5,0-9.1,2.7-9.1,6.1"/>
+<path id="path1_fill" class="st0" d="M22.1,22.4c2.9,0,5.2-2.3,5.2-5.2S24.9,12,22.1,12s-5.2,2.3-5.2,5.2S19.2,22.4,22.1,22.4z"/>
 </svg>
