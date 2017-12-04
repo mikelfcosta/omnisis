@@ -22,6 +22,10 @@ export interface IOmniHolders extends Document {
       timeslots: { _id: Types.ObjectId, start: string, end: string }[];
     };
   };
+  createdAt: Date;
+  createdBy: string;
+  lastUpdatedAt: Date;
+  lastUpdatedBy: string;
 }
 
 export interface IOmniHoldersModel extends Model<IOmniHolders> {}
@@ -53,6 +57,10 @@ class Holders {
         job: String,
         campus: [{ _id: false, type: Schema.Types.ObjectId }],
       },
+      createdAt: { type: Date, default: Date.now },
+      createdBy: { type: String, required: true, ref: 'OmniUsers' },
+      lastUpdatedAt: { type: Date, default: Date.now },
+      lastUpdatedBy: { type: String, required: true, ref: 'OmniUsers' },
     });
   }
 }
