@@ -26,11 +26,11 @@ class SmartCards {
 
   setSchema() {
     this.schema = new Schema({
-      machineId: { type: String, ref: 'OmniSmartMachines' },
-      machineLocation: { type: String, ref: 'OmniSmartLocations' },
+      machineId: { type: Schema.Types.ObjectId, ref: 'OmniSmartMachines' },
+      machineLocation: { type: Schema.Types.ObjectId, ref: 'OmniSmartLocations' },
       holderCard: { type: String, ref: 'OmniSmartCards' },
       holderId: { type: String, ref: 'OmniHolders' },
-      holderGroup: { type: String },
+      holderGroup: { type: Schema.Types.ObjectId, ref: 'OmniHoldersGroups' },
       accessType: { type: String, enum: ['in', 'out'] },
       timestamp: { type: Date, default: Date.now },
     });
