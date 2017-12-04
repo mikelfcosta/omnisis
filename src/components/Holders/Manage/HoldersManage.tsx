@@ -6,8 +6,9 @@ import { Modal } from 'reactstrap';
 import HoldersDetail from './HolderDetail/HoldersDetail';
 import axios from 'axios';
 import { MODULES } from '../../../constants';
+import HoldersManageAssign from './HoldersManageAssign';
 
-interface HoldersManageData {
+export interface HoldersManageData {
   _id: string;
   name: string;
   group: string;
@@ -19,6 +20,8 @@ interface HoldersManageState {
   data: HoldersManageData[];
   length: number;
   modal: boolean;
+  modalType?: string;
+  modalData?: HoldersManageData;
 }
 
 export default class HoldersManage extends React.Component<{}, HoldersManageState> {
@@ -48,14 +51,28 @@ export default class HoldersManage extends React.Component<{}, HoldersManageStat
   render() {
     return (
       <div>
-        <TableCard data={this.state.data} headers={this.headers} order={'-lastUpdatedAt'}
-                   rowKey={'_id'} length={this.state.length} onPaginate={this.getData.bind(this)} />
+        <TableCard data={this.state.data} headers={this.headers} order={'-lastUpdatedAt'} edit={true} assign={true}
+                   rowKey={'_id'} length={this.state.length} onPaginate={this.getData.bind(this)}
+                   onEdit={this.editData.bind(this)} onAssign={this.assignUser.bind(this)}/>
         <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
         <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
-          <HoldersDetail toggle={this.toggle.bind(this)}/>
+          {this.renderModal()}
         </Modal>
       </div>
     );
+  }
+
+  renderModal() {
+    switch (this.state.modalType) {
+      case 'add':
+        return <HoldersDetail toggle={this.toggle.bind(this)}/>;
+      case 'edit':
+        return <HoldersDetail data={this.state.modalData} toggle={this.toggle.bind(this)}/>;
+      case 'assign':
+        return <HoldersManageAssign data={this.state.modalData} toggle={this.toggle.bind(this)}/>;
+      default:
+        return null;
+    }
   }
 
   getData(event: TableCardState) {
@@ -76,6 +93,24 @@ export default class HoldersManage extends React.Component<{}, HoldersManageStat
   toggle() {
     this.setState({
       modal: !this.state.modal,
+      modalType: 'add',
     });
   }
+
+  editData(row: HoldersManageData) {
+    this.setState({
+      modal: !this.state.modal,
+      modalType: 'edit',
+      modalData: row,
+    });
+  }
+
+  assignUser(row: HoldersManageData) {
+    this.setState({
+      modal: !this.state.modal,
+      modalType: 'assign',
+      modalData: row,
+    });
+  }
+
 }
