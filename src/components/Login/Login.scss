@@ -29,5 +29,13 @@
 
   &-button {
     width: 300px;
+    background-color: #067A7C;
+
+    &:hover {
+      background-color: darken(#067A7C, 5);
+    }
+    &:active {
+      background-color: darken(#067A7C, 10);
+    }
   }
 }
