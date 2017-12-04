@@ -2,13 +2,16 @@ import * as React from 'react';
 import Card from '../core/Content/Card';
 import {
   header, headerTitle, headerLinks, headerLinksActive, chart, footer,
-  footerCircle
+  footerCircle,
 } from './InsightsSummary.scss';
+import { LineChart, Line, XAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import axios from 'axios';
+import { MODULES } from '../../constants';
 
 interface InsightsSummaryData {
   [key: string]: {
     summary: { students: number, activeStudents: number, time: string };
-    data: number[];
+    data: any[];
   };
 }
 
@@ -19,19 +22,15 @@ interface InsightsSummaryState {
 
 const data: InsightsSummaryData = {
   daily: {
-    summary: { students: 1231, activeStudents: 860, time: '02h 40m' },
+    summary: { students: 0, activeStudents: 0, time: '00h 00m' },
     data: [],
   },
   monthly: {
-    summary: { students: 1450, activeStudents: 860, time: '01h 55m' },
+    summary: { students: 0, activeStudents: 0, time: '00h 00m' },
     data: [],
   },
   semester: {
-    summary: { students: 1850, activeStudents: 860, time: '01h 30m' },
-    data: [],
-  },
-  yearly: {
-    summary: { students: 2600, activeStudents: 860, time: '01h 25m' },
+    summary: { students: 0, activeStudents: 0, time: '00h 00m' },
     data: [],
   },
 };
@@ -40,13 +39,23 @@ export default class InsightsSummary extends React.Component<{}, InsightsSummary
 
   constructor(props: any) {
     super(props);
+    this.state = {
+      data,
+      view: 'daily',
+    };
   }
 
   componentWillMount() {
-    this.setState({ data, view: 'daily' });
+    this.getData();
   }
 
   componentWillUnmount() {}
+
+  getData() {
+    axios.get(`${MODULES}/dashboard/summary`)
+      .then(response => this.setState({ data: response.data }))
+      .catch(err => console.error(err));
+  }
 
   render() {
     return (
@@ -57,9 +66,17 @@ export default class InsightsSummary extends React.Component<{}, InsightsSummary
             {this.renderLinks()}
           </ul>
         </div>
-        <div className={chart}>
-          <p>Chart will be here</p>
-        </div>
+        <ResponsiveContainer height={400}>
+          <LineChart width={800} height={400} data={this.state.data[this.state.view].data}
+                     margin={{ top: 40, right: 20, left: 20, bottom: 10 }}>
+            <XAxis dataKey="name"/>
+            <CartesianGrid strokeDasharray="2 3" vertical={false}/>
+            <Tooltip/>
+            <Legend />
+            <Line type="monotone" dataKey="registered" stroke="#8884d8" activeDot={{ r: 8 }}/>
+            <Line type="monotone" dataKey="active" stroke="#82ca9d" />
+          </LineChart>
+        </ResponsiveContainer>
         <div className={footer}>
           {this.renderNumbers()}
         </div>
@@ -72,7 +89,6 @@ export default class InsightsSummary extends React.Component<{}, InsightsSummary
       { view: 'daily', text: 'Diário' },
       { view: 'monthly', text: 'Mensal' },
       { view: 'semester', text: 'Semestral' },
-      { view: 'yearly', text: 'Anual' },
     ];
 
     return links.map((link) => {
@@ -88,7 +104,7 @@ export default class InsightsSummary extends React.Component<{}, InsightsSummary
     const currentView = this.state.view;
     const summary = this.state.data[currentView].summary;
     const areas = [
-      { data: summary.students, text: 'Alunos Matriculados' },
+      { data: summary.students, text: 'Novos Alunos Matriculados' },
       { data: summary.activeStudents, text: 'Alunos Ativos' },
       { data: summary.time, text: 'Tempo Médio' },
     ];
