@@ -2,11 +2,19 @@
 
 :global {
   .modal-content {
-    background: #F8F4F4 !important;
+    background: #FFF;
     border: 1px solid #DDDDDD;
     box-sizing: border-box;
     border-radius: 0;
     border-bottom: 5px solid $color-primary;
+    padding: 32px;
+
+  }
+
+  .modal-title {
+    color: $color-primary;
+    font-weight: 700;
+    font-size: 30px;
   }
 
   .modal-header {
@@ -40,6 +48,7 @@
   .btn {
     border-radius: 3px;
     min-width: 150px;
+    text-transform: uppercase;
 
     &-primary {
       background: $color-primary;

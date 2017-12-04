@@ -33,24 +33,22 @@ export default class HoldersManageAssign extends React.Component<HoldersManageAs
         <ModalHeader>Assignar Cartão</ModalHeader>
         <ModalBody>
           <FormGroup>
-            <Label for="holderId">Matrícula</Label>
-            <Input type="text" name="holderId" id="holderId" value={this.state.holderId}
+            <Input type="text" name="holderId" id="holderId" value={this.state.holderId} placeholder={'Matrícula'}
                    onChange={e => this.setState({ holderId: e.target.value })} />
           </FormGroup>
           <FormGroup>
-            <Label for="holderName">Nome Completo</Label>
-            <Input type="text" name="holderName" id="holderName" value={this.props.data.name} disabled/>
+            <Input type="text" name="holderName" id="holderName" value={this.props.data.name} disabled
+                   placeholder={'Nome Completo'}/>
           </FormGroup>
           <FormGroup>
-            <Label for="cardId">Cartão a Assignar</Label>
-            <Input type="text" name="cardId" id="cardId" value={this.state.cardId}
+            <Input type="text" name="cardId" id="cardId" value={this.state.cardId} placeholder={'ID do Cartão'}
                    onChange={e => this.setState({ cardId: e.target.value })} />
           </FormGroup>
         </ModalBody>
         <ModalFooter>
-          <Button color="secondary" onClick={ this.props.toggle }>Cancelar</Button>{ ' ' }
-          <Button color="primary" onClick={ this.submitForm.bind(this) }
-                  disabled={false}>Assignar</Button>
+          <Button color="danger" onClick={ this.props.toggle }>Cancelar</Button>{ ' ' }
+          <Button color="success" onClick={ this.submitForm.bind(this) }
+                  disabled={false}>Salvar</Button>
         </ModalFooter>
       </div>
     );
