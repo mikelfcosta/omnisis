@@ -12,6 +12,9 @@
 # generated sass types
 src/**/*.scss.d.ts
 
+# generated data files
+server/modules/**/*.json
+
 # misc
 .DS_Store
 .env.local
