@@ -8,9 +8,11 @@ import {
   Label,
   Input,
 } from 'reactstrap';
+import { HoldersManageData } from '../HoldersManage';
 
 interface HoldersDetailProps {
   toggle: () => any;
+  data?: HoldersManageData;
 }
 
 interface HoldersDetailState {
@@ -28,15 +30,27 @@ export default class HoldersDetail extends React.Component<HoldersDetailProps, H
   constructor(props: HoldersDetailProps) {
     super(props);
 
-    this.state = {
-      holderId: '',
-      holderName: '',
-      holderGroup: '',
-      holderProfiles: [],
-      holderCourse: '',
-      holderCampus: '',
-      holderSemester: '',
-    };
+    if (props.data) {
+      this.state = {
+        holderId: props.data._id,
+        holderName: props.data.name,
+        holderGroup: props.data.group,
+        holderProfiles: [],
+        holderCourse: '',
+        holderCampus: '',
+        holderSemester: '',
+      };
+    } else {
+      this.state = {
+        holderId: '',
+        holderName: '',
+        holderGroup: '',
+        holderProfiles: [],
+        holderCourse: '',
+        holderCampus: '',
+        holderSemester: '',
+      };
+    }
   }
 
   componentWillMount() {}
@@ -102,7 +116,7 @@ export default class HoldersDetail extends React.Component<HoldersDetailProps, H
         <ModalFooter>
           <Button color="secondary" onClick={ this.props.toggle }>Cancelar</Button>{ ' ' }
           <Button color="primary" onClick={ this.submitForm.bind(this) }
-                  disabled={false}>Adicionar</Button>
+                  disabled={false}>{ this.props.data ? 'Salvar' : 'Adicionar' }</Button>
         </ModalFooter>
       </div>
     );
