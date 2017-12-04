@@ -1,8 +1,9 @@
 import { Schema, Document, Model, model, Types } from 'mongoose';
+import { IOmniCampi } from './omniCampi';
 
 export interface IOmniLocations extends Document {
   _id: Types.ObjectId;
-  campus: Types.ObjectId;
+  campus: Types.ObjectId | IOmniCampi;
   name: string;
   machines: Types.ObjectId[];
   createdAt: Date;

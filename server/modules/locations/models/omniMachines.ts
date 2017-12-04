@@ -1,9 +1,10 @@
 import { Schema, Document, Model, model, Types } from 'mongoose';
+import { IOmniLocations } from './omniLocations';
 
 export interface IOmniMachines extends Document {
   _id: Types.ObjectId;
   status: boolean;
-  location: Types.ObjectId;
+  location: Types.ObjectId | IOmniLocations;
   createdAt: Date;
   createdBy: string;
   lastUpdatedAt: Date;
