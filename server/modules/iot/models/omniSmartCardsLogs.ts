@@ -1,10 +1,11 @@
 import { Schema, Document, model, Model, Types } from 'mongoose';
 import { IOmniHolders } from '../../holders/models/omniHolders';
+import { IOmniLocations } from '../../locations/models/omniLocations';
 
 export interface IOmniSmartCardsLogs extends Document {
   _id: Types.ObjectId;
   machineId: string;
-  machineLocation: string;
+  machineLocation: Types.ObjectId | IOmniLocations;
   holderCard: string;
   holderId: string;
   holderGroup: string;
@@ -26,8 +27,8 @@ class SmartCards {
 
   setSchema() {
     this.schema = new Schema({
-      machineId: { type: Schema.Types.ObjectId, ref: 'OmniSmartMachines' },
-      machineLocation: { type: Schema.Types.ObjectId, ref: 'OmniSmartLocations' },
+      machineId: { type: Schema.Types.ObjectId, ref: 'OmniMachines' },
+      machineLocation: { type: Schema.Types.ObjectId, ref: 'OmniLocations' },
       holderCard: { type: String, ref: 'OmniSmartCards' },
       holderId: { type: String, ref: 'OmniHolders' },
       holderGroup: { type: Schema.Types.ObjectId, ref: 'OmniHoldersGroups' },
