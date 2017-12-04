@@ -22,7 +22,7 @@ export default async (req: Request, res: Response) => {
       const day = moment().subtract(i, 'd');
       const registered = await omniHolders.count({ lastUpdatedAt: { $lte: day.toDate() } });
       const active = await omniHolders.count({ lastUpdatedAt: { $lte: moment(day).subtract(14, 'd').toDate() } });
-      daily.data.push({ registered, active, name: day.format('DD/MM') });
+      daily.data.push({ Registrados: registered, Ativos: active, name: day.format('DD/MM') });
     }
     daily.summary['students'] = await omniHolders.count({ lastUpdatedAt: { $gte: moment().subtract(31, 'd').toDate() } });
     daily.summary['activeStudents'] = await omniHolders.count({ lastUpdatedAt: { $lte: moment().subtract(14, 'd').toDate() } });
@@ -34,7 +34,7 @@ export default async (req: Request, res: Response) => {
       const month = moment().subtract(i, 'M').startOf('M');
       const registered = await omniHolders.count({ lastUpdatedAt: { $lte: month.toDate() } });
       const active = await omniHolders.count({ lastUpdatedAt: { $lte: moment(month).subtract(14, 'd').toDate() } });
-      monthly.data.push({ registered, active, name: month.format('MM/YYYY') });
+      monthly.data.push({ Registrados: registered, Ativos: active, name: month.format('MM/YYYY') });
     }
     monthly.summary['students'] = await omniHolders.count({ lastUpdatedAt: { $gte: moment().subtract(4, 'M').startOf('M').toDate() } });
     monthly.summary['activeStudents'] = await omniHolders.count({ lastUpdatedAt: { $lte: moment().subtract(4, 'M').startOf('M').subtract('14', 'd').toDate() } });
@@ -49,8 +49,8 @@ export default async (req: Request, res: Response) => {
     const secondSemesterRegistered = await omniHolders.count({ lastUpdatedAt: { $lte: secondSemester.toDate() } });
     const firstSemesterActive = await omniHolders.count({ lastUpdatedAt: { $lte: moment(firstSemester).subtract(14, 'd').toDate() } });
     const secondSemesterActive = await omniHolders.count({ lastUpdatedAt: { $lte: moment(secondSemester).subtract(14, 'd').toDate() } });
-    semester.data.push({ registered: firstSemesterRegistered, active: firstSemesterActive, name: firstSemester.format('MM/YYYY') });
-    semester.data.push({ registered: secondSemesterRegistered, active: secondSemesterActive, name: secondSemester.format('MM/YYYY') });
+    semester.data.push({ Registrados: firstSemesterRegistered, Ativos: firstSemesterActive, name: firstSemester.format('MM/YYYY') });
+    semester.data.push({ Registrados: secondSemesterRegistered, Ativos: secondSemesterActive, name: secondSemester.format('MM/YYYY') });
     semester.summary['students'] = await omniHolders.count({ lastUpdatedAt: { $gte: moment(firstSemester).toDate() } });
     semester.summary['activeStudents'] = await omniHolders.count({ lastUpdatedAt: { $lte: moment(secondSemester).subtract('14', 'd').toDate() } });
     semester.summary['time'] = '1h 30m';
