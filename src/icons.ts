@@ -7,3 +7,5 @@ export const ADD = require('./img/icons/ico-add.svg');
 export const CARDS = require('./img/icons/ico-cards.svg');
 export const EDIT = require('./img/icons/ico-edit.svg');
 export const ADMIN = require('./img/icons/ico-admin.svg');
+export const ASSIGN = require('./img/icons/ico-assign.svg');
+export const ASSIGN_DISABLED = require('./img/icons/ico-assign-disabled.svg');
