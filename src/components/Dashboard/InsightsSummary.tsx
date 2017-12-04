@@ -73,8 +73,8 @@ export default class InsightsSummary extends React.Component<{}, InsightsSummary
             <CartesianGrid strokeDasharray="2 3" vertical={false}/>
             <Tooltip/>
             <Legend />
-            <Line type="monotone" dataKey="registered" stroke="#8884d8" activeDot={{ r: 8 }}/>
-            <Line type="monotone" dataKey="active" stroke="#82ca9d" />
+            <Line type="monotone" dataKey="registered" stroke="#ED9262" activeDot={{ r: 8 }}/>
+            <Line type="monotone" dataKey="active" stroke="#004751" />
           </LineChart>
         </ResponsiveContainer>
         <div className={footer}>

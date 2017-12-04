@@ -38,7 +38,7 @@ export default class HoldersOnCampus extends React.Component<{}, HoldersOnCampus
         </div>
         <ResponsiveContainer height={250}>
           <PieChart>
-            <Pie data={this.state.data} innerRadius={40} outerRadius={80} fill="#82ca9d" dataKey="holders" label/>
+            <Pie data={this.state.data} innerRadius={40} outerRadius={80} fill="#ED9262" dataKey="holders" label/>
             <Tooltip/>
           </PieChart>
         </ResponsiveContainer>
