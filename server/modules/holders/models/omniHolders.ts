@@ -1,19 +1,20 @@
 import { Types, Schema, Document, Model, model } from 'mongoose';
+import { IOmniHoldersGroups } from './omniHoldersGroups';
 
 export interface IOmniHolders extends Document {
   _id: string;
   name: string;
   type: string;
-  group: string;
+  group: Types.ObjectId | IOmniHoldersGroups;
   activeCard: string | null;
-  student?: {
+  student: {
     mainCampus?: Types.ObjectId;
     activeCourse?: Types.ObjectId;
     activeCourseStart?: Date;
     activeCourseEnd?: Date;
     currentSemester?: number;
   };
-  staff?: {
+  staff: {
     job?: string;
     campus?: { type: Types.ObjectId }[];
     worksheet?: {
