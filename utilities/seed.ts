@@ -6,6 +6,7 @@ import omniMachines from '../server/modules/locations/models/omniMachines';
 import omniSmartCards from '../server/modules/iot/models/omniSmartCards';
 import omniHoldersProfiles from '../server/modules/holders/models/omniHoldersProfiles';
 import omniHolders from '../server/modules/holders/models/omniHolders';
+import omniSmartCardsLogs from '../server/modules/iot/models/omniSmartCardsLogs';
 import { groupsSeed } from './seed/groupsSeed';
 import { campusSeed } from './seed/campusSeed';
 import { locationsSeed } from './seed/locationsSeed';
@@ -14,6 +15,7 @@ import cardsSeed from './seed/cardsSeed';
 import profilesSeed from './seed/profilesSeed';
 import { holdersSeed } from './seed/holdersSeed';
 import cardAssignSeed from './seed/cardAssignSeed';
+import accessLogsSeed from './seed/accessLogsSeed';
 
 (<any>mongoose).Promise = Promise;
 mongoose.connect('mongodb://localhost:27017/iot', { useMongoClient: true });
@@ -26,6 +28,7 @@ export const models = {
   omniLocations,
   omniMachines,
   omniSmartCards,
+  omniSmartCardsLogs,
 };
 
 export async function mainSeed() {
@@ -38,6 +41,7 @@ export async function mainSeed() {
     await profilesSeed();
     await holdersSeed();
     await cardAssignSeed();
+    await accessLogsSeed();
   } catch (err) {
     return Promise.reject(err);
   }
