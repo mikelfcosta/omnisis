@@ -4,3 +4,5 @@ export const USERS = require('./img/icons/ico-user.svg');
 export const INSIGHTS = require('./img/icons/ico-insights.svg');
 export const LISTSEARCH = require('./img/icons/ico-listsearch.svg');
 export const ADD = require('./img/icons/ico-add.svg');
+export const CARDS = require('./img/icons/ico-cards.svg');
+export const EDIT = require('./img/icons/ico-edit.svg');

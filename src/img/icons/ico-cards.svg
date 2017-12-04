@@ -1,0 +1,46 @@
+<svg width="29" height="18" viewBox="0 0 29 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Icon : Credit-card2</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(8838 4772)">
+<g id="Icon : Credit-card2">
+<g id="Stroke 419">
+<use xlink:href="#path0_stroke" transform="translate(-8837 -4771)" fill="#E66B48"/>
+</g>
+<g id="Rectangle">
+<use xlink:href="#path1_fill" transform="translate(-8833.22 -4767.11)" fill="#E66B48"/>
+</g>
+<g id="Numbers">
+<use xlink:href="#path2_fill" transform="translate(-8834.22 -4758.56)" fill="#E66B48"/>
+</g>
+<g id="Numbers">
+<use xlink:href="#path2_fill" transform="translate(-8832 -4758.56)" fill="#E66B48"/>
+</g>
+<g id="Numbers">
+<use xlink:href="#path2_fill" transform="translate(-8829.78 -4758.56)" fill="#E66B48"/>
+</g>
+<g id="Numbers">
+<use xlink:href="#path2_fill" transform="translate(-8825.78 -4758.56)" fill="#E66B48"/>
+</g>
+<g id="Numbers">
+<use xlink:href="#path2_fill" transform="translate(-8823.56 -4758.56)" fill="#E66B48"/>
+</g>
+<g id="Numbers">
+<use xlink:href="#path2_fill" transform="translate(-8821.33 -4758.56)" fill="#E66B48"/>
+</g>
+<g id="Numbers">
+<use xlink:href="#path2_fill" transform="translate(-8818.78 -4758.56)" fill="#E66B48"/>
+</g>
+<g id="Numbers">
+<use xlink:href="#path2_fill" transform="translate(-8816.56 -4758.56)" fill="#E66B48"/>
+</g>
+<g id="numbers">
+<use xlink:href="#path2_fill" transform="translate(-8814.33 -4758.56)" fill="#E66B48"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_stroke" d="M 26 15.4286C 26 15.2689 26.0751 15.1493 26.1473 15.0852C 26.2177 15.0226 26.2947 15 26.3571 15L 26.3571 17C 27.1503 17 28 16.4038 28 15.4286L 26 15.4286ZM 26.3571 15L 0.642857 15L 0.642857 17L 26.3571 17L 26.3571 15ZM 0.642857 15C 0.705298 15 0.782291 15.0226 0.852721 15.0852C 0.924927 15.1493 1 15.2689 1 15.4286L -1 15.4286C -1 16.4038 -0.150303 17 0.642857 17L 0.642857 15ZM 1 15.4286L 1 0.571429L -1 0.571429L -1 15.4286L 1 15.4286ZM 1 0.571429C 1 0.731087 0.924927 0.850654 0.852721 0.914838C 0.782291 0.977442 0.705298 1 0.642857 1L 0.642857 -1C -0.150304 -1 -1 -0.403758 -1 0.571429L 1 0.571429ZM 0.642857 1L 26.3571 1L 26.3571 -1L 0.642857 -1L 0.642857 1ZM 26.3571 1C 26.2947 1 26.2177 0.977442 26.1473 0.914837C 26.0751 0.850654 26 0.731086 26 0.571429L 28 0.571429C 28 -0.403757 27.1503 -1 26.3571 -1L 26.3571 1ZM 26 0.571429L 26 15.4286L 28 15.4286L 28 0.571429L 26 0.571429Z"/>
+<path id="path1_fill" fill-rule="evenodd" d="M 0 1C 0 0.447715 0.447715 0 1 0L 3.88889 0C 4.44117 0 4.88889 0.447715 4.88889 1L 4.88889 3.44444C 4.88889 3.99673 4.44117 4.44444 3.88889 4.44444L 1 4.44444C 0.447715 4.44444 0 3.99673 0 3.44444L 0 1Z"/>
+<path id="path2_fill" fill-rule="evenodd" d="M 1.33333 0.888889L 0.444444 0.888889C 0.198667 0.888889 0 0.689778 0 0.444444C 0 0.199111 0.198667 0 0.444444 0L 1.33333 0C 1.57911 0 1.77778 0.199111 1.77778 0.444444C 1.77778 0.689778 1.57911 0.888889 1.33333 0.888889Z"/>
+</defs>
+</svg>
