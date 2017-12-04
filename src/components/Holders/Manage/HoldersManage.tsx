@@ -29,7 +29,7 @@ export default class HoldersManage extends React.Component<{}, HoldersManageStat
 
     this.state = {
       data: [],
-      length: 20,
+      length: 0,
       modal: false,
     };
   }
@@ -59,7 +59,7 @@ export default class HoldersManage extends React.Component<{}, HoldersManageStat
   }
 
   getData(event: TableCardState) {
-    axios.get(`${MODULES}/holders/manage/users`, {
+    axios.get(`${MODULES}/holders/manage`, {
       params: {
         page: event.page,
         limit: event.limit,
