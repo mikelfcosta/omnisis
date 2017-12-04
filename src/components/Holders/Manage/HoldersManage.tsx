@@ -4,6 +4,8 @@ import FabButton from '../../core/Elements/FabButton';
 import { ADD } from '../../../icons';
 import Modal from 'reactstrap/lib/Modal';
 import HoldersDetail from './HolderDetail/HoldersDetail';
+import axios from 'axios';
+import { MODULES } from '../../../constants';
 
 interface HoldersManageData {
   holderId: string;
@@ -42,7 +44,11 @@ export default class HoldersManage extends React.Component<{}, HoldersManageStat
     };
   }
 
-  componentWillMount() { }
+  componentWillMount() {
+    axios.get(`${MODULES}/holders/manage/users`)
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+  }
 
   componentWillUnmount() {
     console.log('Unmounting component');
