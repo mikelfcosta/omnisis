@@ -48,7 +48,7 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
             <tr>
               {this.renderHeader()}
               {this.props.edit ? <th>Editar</th> : null}
-              {this.props.assign ? <th>Assignar</th> : null}
+              {this.props.assign ? <th>Associar</th> : null}
             </tr>
           </thead>
           <tbody>

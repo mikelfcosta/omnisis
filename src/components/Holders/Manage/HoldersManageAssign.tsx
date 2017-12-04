@@ -30,7 +30,7 @@ export default class HoldersManageAssign extends React.Component<HoldersManageAs
   render() {
     return (
       <div>
-        <ModalHeader>Assignar Cartão</ModalHeader>
+        <ModalHeader>Associar Cartão</ModalHeader>
         <ModalBody>
           <FormGroup>
             <Input type="text" name="holderId" id="holderId" value={this.state.holderId} placeholder={'Matrícula'}
