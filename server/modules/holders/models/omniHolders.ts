@@ -1,18 +1,20 @@
 import { Types, Schema, Document, Model, model } from 'mongoose';
+import { IOmniHoldersGroups } from './omniHoldersGroups';
 
 export interface IOmniHolders extends Document {
   _id: string;
   name: string;
   type: string;
+  group: Types.ObjectId | IOmniHoldersGroups;
   activeCard: string | null;
-  student?: {
+  student: {
     mainCampus?: Types.ObjectId;
     activeCourse?: Types.ObjectId;
     activeCourseStart?: Date;
     activeCourseEnd?: Date;
     currentSemester?: number;
   };
-  staff?: {
+  staff: {
     job?: string;
     campus?: { type: Types.ObjectId }[];
     worksheet?: {
@@ -21,6 +23,10 @@ export interface IOmniHolders extends Document {
       timeslots: { _id: Types.ObjectId, start: string, end: string }[];
     };
   };
+  createdAt: Date;
+  createdBy: string;
+  lastUpdatedAt: Date;
+  lastUpdatedBy: string;
 }
 
 export interface IOmniHoldersModel extends Model<IOmniHolders> {}
@@ -36,7 +42,8 @@ class Holders {
     this.schema = new Schema({
       _id: { type: String, required: true },
       name: { type: String, required: true },
-      type: { type: String, required: true },
+      group: { type: Schema.Types.ObjectId, ref: 'OmniHoldersGroups', required: true },
+      profiles: [{ type: Schema.Types.ObjectId, ref: 'OmniHoldersProfiles', required: true }],
       activeCard: { type: String, ref: 'OmniSmartCards' },
       student: {
         _id: false,
@@ -50,10 +57,11 @@ class Holders {
         _id: false,
         job: String,
         campus: [{ _id: false, type: Schema.Types.ObjectId }],
-        worksheet: [
-          { weekday: String, timeslots: [{ start: String, end: String }] },
-        ],
       },
+      createdAt: { type: Date, default: Date.now },
+      createdBy: { type: String, required: true, ref: 'OmniUsers' },
+      lastUpdatedAt: { type: Date, default: Date.now },
+      lastUpdatedBy: { type: String, required: true, ref: 'OmniUsers' },
     });
   }
 }

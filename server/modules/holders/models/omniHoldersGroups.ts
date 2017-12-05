@@ -1,7 +1,12 @@
-import { Schema, Document, Model, model } from 'mongoose';
+import { Schema, Document, Model, model, Types } from 'mongoose';
 
 export interface IOmniHoldersGroups extends Document {
-  _id: Schema.Types.ObjectId;
+  _id: Types.ObjectId;
+  name: string;
+  createdAt: Date;
+  createdBy: string;
+  lastUpdatedAt: Date;
+  lastUpdatedBy: string;
 }
 
 export interface IOmniHoldersGroupsModel extends Model<IOmniHoldersGroups> {}
@@ -15,7 +20,11 @@ class HoldersGroups {
 
   setSchema() {
     this.schema = new Schema({
-
+      name: { type: String, required: true },
+      createdAt: { type: Date, default: Date.now },
+      createdBy: { type: String, required: true, ref: 'OmniUsers' },
+      lastUpdatedAt: { type: Date, default: Date.now },
+      lastUpdatedBy: { type: String, required: true, ref: 'OmniUsers' },
     });
   }
 }

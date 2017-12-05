@@ -2,67 +2,93 @@ import * as React from 'react';
 import TableCard, { TableCardState } from '../../core/Content/TableCard';
 import FabButton from '../../core/Elements/FabButton';
 import { ADD } from '../../../icons';
-import Modal from 'reactstrap/lib/Modal';
+import { Modal } from 'reactstrap';
 import HoldersDetail from './HolderDetail/HoldersDetail';
+import axios from 'axios';
+import { MODULES } from '../../../constants';
+import HoldersManageAssign from './HoldersManageAssign';
 
-interface HoldersManageData {
-  holderId: string;
+export interface HoldersManageData {
+  _id: string;
   name: string;
+  group: string;
   campus: string;
-  course: string;
-  semester: number;
+  activeCard: string;
 }
 
 interface HoldersManageState {
   data: HoldersManageData[];
+  length: number;
   modal: boolean;
+  modalType?: string;
+  modalData: any;
 }
 
-const data: HoldersManageData[] = [
-  { holderId: '20709639', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '23504602', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '20135403', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '25334523', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '23745354', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '23453545', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '21354145', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '24531235', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-  { holderId: '22120545', name: 'Michel Costa', campus: 'Morumbi', course: 'Design Digital', semester: 6 },
-];
-
 export default class HoldersManage extends React.Component<{}, HoldersManageState> {
-  private headers = ['Matrícula', 'Nome', 'Campus', 'Curso', 'Semestre'];
+  private headers = ['Matrícula', 'Nome', 'Grupo', 'Campus', 'Cartão'];
 
   constructor(props: any) {
     super(props);
 
     this.state = {
-      data,
+      data: [],
+      length: 0,
       modal: false,
+      modalData: {},
     };
   }
 
-  componentWillMount() { }
-
-  componentWillUnmount() {
-    console.log('Unmounting component');
+  componentWillMount() {
+    this.getData({
+      page: 0,
+      limit: 10,
+      order: '-_id',
+      search: '',
+    });
   }
+
+  componentWillUnmount() {}
 
   render() {
     return (
       <div>
-        <TableCard data={this.state.data} headers={this.headers}
-                   rowKey={'holderId'} length={20} onPaginate={this.getData.bind(this)} />
+        <TableCard data={this.state.data} headers={this.headers} order={'-lastUpdatedAt'} edit={true} assign={true}
+                   rowKey={'_id'} length={this.state.length} onPaginate={this.getData.bind(this)}
+                   onEdit={this.editData.bind(this)} onAssign={this.assignUser.bind(this)}/>
         <FabButton icon={ADD} onClick={this.toggle.bind(this)} />
         <Modal isOpen={this.state.modal} toggle={this.toggle.bind(this)}>
-          <HoldersDetail toggle={this.toggle.bind(this)}/>
+          {this.renderModal()}
         </Modal>
       </div>
     );
   }
 
+  renderModal() {
+    switch (this.state.modalType) {
+      case 'add':
+        return <HoldersDetail toggle={this.toggle.bind(this)}/>;
+      case 'edit':
+        return <HoldersDetail data={this.state.modalData} toggle={this.toggle.bind(this)}/>;
+      case 'assign':
+        return <HoldersManageAssign data={this.state.modalData} toggle={this.toggle.bind(this)}/>;
+      default:
+        return null;
+    }
+  }
+
   getData(event: TableCardState) {
-    console.log(event);
+    axios.get(`${MODULES}/holders/manage`, {
+      params: {
+        page: event.page,
+        limit: event.limit,
+        order: event.order,
+        search: event.search,
+      },
+    })
+      .then((response) => {
+        this.setState({ data: response.data.holders, length: response.data.total });
+      })
+      .catch(err => console.error(err));
   }
 
   toggle() {
@@ -70,4 +96,21 @@ export default class HoldersManage extends React.Component<{}, HoldersManageStat
       modal: !this.state.modal,
     });
   }
+
+  editData(row: HoldersManageData) {
+    this.setState({
+      modal: !this.state.modal,
+      modalType: 'edit',
+      modalData: row,
+    });
+  }
+
+  assignUser(row: HoldersManageData) {
+    this.setState({
+      modal: !this.state.modal,
+      modalType: 'assign',
+      modalData: row,
+    });
+  }
+
 }

@@ -1,0 +1,41 @@
+@import "../../sass/variables";
+
+.login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex: 1 1;
+  justify-content: center;
+  align-items: center;
+
+  &-container {
+    width: 500px;
+    height: 600px;
+    background: linear-gradient(180deg, $color-primary 15%, #E66B48 115%);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-logo {
+    width: 300px;
+  }
+
+  &-body {
+    margin-top: 40px;
+    height: 300px;
+  }
+
+  &-button {
+    width: 300px;
+    background-color: #067A7C;
+
+    &:hover {
+      background-color: darken(#067A7C, 5);
+    }
+    &:active {
+      background-color: darken(#067A7C, 10);
+    }
+  }
+}

@@ -1,16 +1,18 @@
 import { Schema, Document, model, Model, Types } from 'mongoose';
+import { IOmniHolders, default as omniHolders } from '../../holders/models/omniHolders';
+import omniSmartCardsLogs from './omniSmartCardsLogs';
 
 export interface IOmniSmartCards extends Document {
   _id: string;
   assigned: boolean;
-  student?: string;
+  student?: string | IOmniHolders;
   active: boolean;
   lastAssignedBy?: string;
   lastAssignedAt?: Date;
 }
 
 export interface IOmniSmartCardsModel extends Model<IOmniSmartCards> {
-  checkStudent: (cardId: string) => { student: string, active: boolean, assigned: boolean };
+  checkStudent: (cardId: string) => { student: string, active: boolean, assigned: boolean, lastAssignedAt: Date, lastAssignedBy: string };
 }
 
 export enum ECardErrors {
@@ -29,16 +31,27 @@ class SmartCards {
       _id: { type: String, required: true },
       assigned: { type: Boolean, default: false },
       student: { type: String, ref: 'OmniHolders' },
-      active: { type: Boolean, default: false },
+      active: { type: Boolean, default: true },
       lastAssignedBy: { type: String, ref: 'OmniUsers' },
-      lastAssignedAt: Date,
+      lastAssignedAt: { type: Date, default: Date.now },
     });
   }
 
   public static async checkStudent(this: IOmniSmartCardsModel, cardId: string) {
-    const card = await this.findById(cardId).populate('student');
+    const card = <IOmniSmartCards>await this.findById(cardId).populate('student');
     if (card) {
-      return { student: (<any>card.student).name, active: card.active, assigned: card.assigned, lastAssignedAt: card.lastAssignedAt, lastAssignedBy: card.lastAssignedBy };
+      const student = <IOmniHolders>card.student;
+      if (!student) return Promise.reject('Card has no student assigned');
+      const isInside = await omniSmartCardsLogs.isInside(cardId, student._id);
+      await omniSmartCardsLogs.createLog(student, 'machineId');
+      return {
+        isInside,
+        student: student.name,
+        active: card.active,
+        assigned: card.assigned,
+        lastAssignedAt: card.lastAssignedAt,
+        lastAssignedBy: card.lastAssignedBy,
+      };
     } else {
       return Promise.reject(ECardErrors.NoCardFound);
     }

@@ -3,9 +3,10 @@ import Card from '../core/Content/Card';
 import { cardHeader } from '../core/Content/Card.scss';
 import { chart, table } from './HoldersOnCampus.scss';
 import Table from 'reactstrap/lib/Table';
+import { Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface HoldersOnCampusData {
-  campus: string;
+  name: string;
   holders: number;
 }
 
@@ -14,11 +15,11 @@ interface HoldersOnCampusState {
 }
 
 const data: HoldersOnCampusData[] = [
-  { campus: 'Mooca', holders: 355 },
-  { campus: 'Vila Olímpia', holders: 284 },
-  { campus: 'Morumbi', holders: 232 },
-  { campus: 'Paulista 1', holders: 181 },
-  { campus: 'Paulista 2', holders: 163 },
+  { name: 'Mooca', holders: 355 },
+  { name: 'Vila Olímpia', holders: 284 },
+  { name: 'Morumbi', holders: 232 },
+  { name: 'Paulista 1', holders: 181 },
+  { name: 'Paulista 2', holders: 163 },
 ];
 
 export default class HoldersOnCampus extends React.Component<{}, HoldersOnCampusState> {
@@ -35,9 +36,12 @@ export default class HoldersOnCampus extends React.Component<{}, HoldersOnCampus
         <div className={cardHeader}>
           Alunos nos Campus
         </div>
-        <div className={chart}>
-          <p>Chart will be here</p>
-        </div>
+        <ResponsiveContainer height={250}>
+          <PieChart>
+            <Pie data={this.state.data} innerRadius={40} outerRadius={80} fill="#ED9262" dataKey="holders" label/>
+            <Tooltip/>
+          </PieChart>
+        </ResponsiveContainer>
         <Table className={table}>
           <thead>
             <tr>
@@ -56,8 +60,8 @@ export default class HoldersOnCampus extends React.Component<{}, HoldersOnCampus
   renderData() {
     return this.state.data.map((row) => {
       return (
-        <tr key={row.campus}>
-          <th>{row.campus}</th>
+        <tr key={row.name}>
+          <th>{row.name}</th>
           <th>{row.holders}</th>
         </tr>
       );

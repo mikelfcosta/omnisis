@@ -2,15 +2,19 @@ import * as React from 'react';
 import Card from './Card';
 import Table from 'reactstrap/lib/Table';
 import { tableCardToolbar, tableCardPagination } from './TableCard.scss';
-import { LISTSEARCH } from '../../../icons';
-import { debounce } from 'lodash';
+import { EDIT, LISTSEARCH, ASSIGN, ASSIGN_DISABLED } from '../../../icons';
 
 interface TableCardProps {
   rowKey: string;
   headers: string[];
   data: any[];
   length: number;
+  order?: string;
   onPaginate: (event: TableCardState) => any;
+  edit?: boolean;
+  assign?: boolean;
+  onEdit?: (e: React.MouseEvent<HTMLImageElement>) => any;
+  onAssign?: (e: React.MouseEvent<HTMLImageElement>) => any;
 }
 
 export interface TableCardState {
@@ -24,7 +28,7 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
 
   constructor(props: TableCardProps) {
     super(props);
-    this.state = { search: '', page: 0, limit: 10 };
+    this.state = { search: '', page: 0, limit: 10, order: props.order };
   }
 
   componentWillUnmount() {}
@@ -43,6 +47,8 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
           <thead>
             <tr>
               {this.renderHeader()}
+              {this.props.edit ? <th>Editar</th> : null}
+              {this.props.assign ? <th>Associar</th> : null}
             </tr>
           </thead>
           <tbody>
@@ -83,12 +89,17 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
   }
 
   renderRows() {
+    if (this.props.data.length === 0) return;
     return this.props.data.map((row) => {
-      return (
-        <tr key={row[this.props.rowKey]}>
-          {this.renderCells(row)}
-        </tr>
-      );
+      if (row != null) {
+        return (
+          <tr key={row[this.props.rowKey]}>
+            {this.renderCells(row)}
+            {this.renderEdit(row)}
+            {this.renderAssign(row)}
+          </tr>
+        );
+      }
     });
   }
 
@@ -113,6 +124,41 @@ export default class TableCard extends React.Component<TableCardProps, TableCard
     this.setState(change, () => {
       this.props.onPaginate(this.state);
     });
+  }
+
+  renderEdit(row: any) {
+    if (this.props.edit) {
+      return (
+        <th>
+          <img src={EDIT} alt="Editar" onClick={e => this.handleEdit(row)} style={ { width: '22px', marginLeft: '10px', cursor: 'pointer' } } />
+        </th>
+      );
+    }
+  }
+
+  handleEdit(row: any) {
+    if (this.props.onEdit) {
+      this.props.onEdit(row);
+    }
+  }
+
+  renderAssign(row: any) {
+    const icon = row.activeCard == null ? ASSIGN : ASSIGN_DISABLED;
+    const styles: any = { width: '22px', marginLeft: '20px' };
+    if (!row.activeCard) styles['cursor'] = 'pointer';
+    if (this.props.assign) {
+      return (
+        <th>
+          <img src={icon} alt="Assignar" onClick={e => this.handleAssign(row)} style={styles} />
+        </th>
+      );
+    }
+  }
+
+  handleAssign(row: any) {
+    if (this.props.onAssign) {
+      this.props.onAssign(row);
+    }
   }
 
 }

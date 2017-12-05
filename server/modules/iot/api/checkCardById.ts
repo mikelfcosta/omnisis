@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import * as slugify from 'slugify';
-import { ECardErrors, omniSmartCards } from '../models/Cards';
+import { ECardErrors, omniSmartCards } from '../models/omniSmartCards';
 
 import { PRIVATE_KEY } from '../index';
+import normalizeName from '../common/normalizeName';
 
 /**
  * Given a Card ID, check if the card exists, is assigned and validated.
@@ -21,25 +21,15 @@ export default async (req: Request, res: Response) => {
   try {
     const user = await omniSmartCards.checkStudent(_id);
 
-    if (!user) res.json({ line1: 'CARTAO INVALIDO ', access: '0' });
+    if (!user) res.json({ line1: 'CARTAO INVALIDO ', line2: 'ACESSO NEGADO!!!', access: '0' });
 
-    console.log(user);
-    const studentNameArray = (<any>user.student).split(' ');
-    const studentNameWithSpecialCharacters = `${studentNameArray[0]} ${studentNameArray[studentNameArray.length - 1]}`
-      .substr(0, 16);
+    const studentName = normalizeName(user.student);
 
-    let studentNameNormalized = (<string>slugify(studentNameWithSpecialCharacters)).toUpperCase();
+    const response = { line1: studentName, line2: user.active ? 'ACESSO LIBERADO!' : 'ACESSO NEGADO!!!', access: user.active ? '1' : '0' };
 
-    for (let i = studentNameNormalized.length; i < 16; i += 1) {
-      studentNameNormalized += ' ';
-    }
-
-    const studentName = studentNameNormalized.replace('-', ' ');
-    const response = { line1: studentName, access: user.active ? '1' : '0' };
-    console.log(studentName);
     res.json(response);
   } catch (err) {
-    if (err === ECardErrors.NoCardFound) return res.status(400).json({ line1: ECardErrors.NoCardFound, access: '0' });
+    if (err === ECardErrors.NoCardFound) return res.status(400).json({ line1: ECardErrors.NoCardFound, line2: 'ACESSO NEGADO!!!', access: '0' });
     console.log(err);
     res.status(500).json({ err });
   }
